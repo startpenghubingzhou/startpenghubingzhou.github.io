@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      联想潮7000 14 EFI 3.1更新 | 望海之洲 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="John Doe">
+    
+    
+
+    <meta name="description" content="前言 这应该是今年最后一个潮7000 14寸EFI的更新了。回想这一年一路走来，黑果之路有过艰辛，有过坎坷。从零开始，在我的手下，潮7000 14从无到有，从触摸到变频再到多版本适配，一步一个脚印，日益完善。 当然，楼主不是最先开始开发这一机型EFI的人，在我之前，早就有人发布了相应的EFI。小白伯同学完成了最早期的潮7000 14寸EFI的适配，并推出了13的安装版（他的原帖子详见这里）。但是，">
+<meta name="keywords" content="更新,Config">
+<meta property="og:type" content="article">
+<meta property="og:title" content="联想潮7000 14 EFI 3.1更新 | 望海之洲">
+<meta property="og:url" content="http://yoursite.com/2018/12/18/Lenovo Xiaoxin Chao7000 14 EFI 3.1 Update/index.html">
+<meta property="og:site_name" content="望海之洲">
+<meta property="og:description" content="前言 这应该是今年最后一个潮7000 14寸EFI的更新了。回想这一年一路走来，黑果之路有过艰辛，有过坎坷。从零开始，在我的手下，潮7000 14从无到有，从触摸到变频再到多版本适配，一步一个脚印，日益完善。 当然，楼主不是最先开始开发这一机型EFI的人，在我之前，早就有人发布了相应的EFI。小白伯同学完成了最早期的潮7000 14寸EFI的适配，并推出了13的安装版（他的原帖子详见这里）。但是，">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-25T04:53:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="联想潮7000 14 EFI 3.1更新 | 望海之洲">
+<meta name="twitter:description" content="前言 这应该是今年最后一个潮7000 14寸EFI的更新了。回想这一年一路走来，黑果之路有过艰辛，有过坎坷。从零开始，在我的手下，潮7000 14从无到有，从触摸到变频再到多版本适配，一步一个脚印，日益完善。 当然，楼主不是最先开始开发这一机型EFI的人，在我之前，早就有人发布了相应的EFI。小白伯同学完成了最早期的潮7000 14寸EFI的适配，并推出了13的安装版（他的原帖子详见这里）。但是，">
+    
+    
+      <link rel="alternate" href="/atom.xml" title="望海之洲" type="application/atom+xml">
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for 望海之洲"><img src="/avatar.png" width="80" alt="望海之洲 logo" class="panel-cover__logo logo"></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">望海之洲</a></h1>
+        <hr class="panel-cover__divider">
+
+        
+        <p class="panel-cover__description">
+          澎湖冰洲的极客地带
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">总览</a></li>
+              
+                
+                <li class="navigation__item"><a href="/resources" title="" class="">资源</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/penghubingzhou" title="Huno on GitHub">
+          <i class="icon icon-social-github"></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">联想潮7000 14 EFI 3.1更新</h1>
+
+    
+    <div class="post-meta">
+      <time datetime="2018-12-18" class="post-meta__date date">2018-12-18</time> 
+      <span class="post-meta__tags tags">
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/EFI/">EFI</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Config/">Config</a>, <a class="tags-link" href="/tags/更新/">更新</a>
+            </font>
+          
+      </span>
+
+      <span class="post-meta__wordcount wordcount">
+      <font class="wordcount">
+      &#8227; 文章字数:
+      731
+      </font> 
+      </span>
+    
+    </div>
+    
+  </header>
+
+
+  <section id="post-content" class="article-content post">
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p>这应该是今年最后一个潮7000 14寸EFI的更新了。回想这一年一路走来，黑果之路有过艰辛，有过坎坷。从零开始，在我的手下，潮7000 14从无到有，从触摸到变频再到多版本适配，一步一个脚印，日益完善。</p>
+<p>当然，楼主不是最先开始开发这一机型EFI的人，在我之前，早就有人发布了相应的EFI。小白伯同学完成了最早期的潮7000 14寸EFI的适配，并推出了13的安装版（他的原帖子详见<a href="http://bbs.pcbeta.com/viewthread-1763675-1-1.html" target="_blank" rel="noopener">这里</a>）。但是，在开发之初，我并不太清楚有这个帖子，所以我仍然是从零开始的。不过，也正是这次美丽的错过，才有了后来14寸从12、13到14全系列的适配EFI。应该说，这应该是一种缘分。</p>
+<p>最近博主的身体不算太好，就在发此文章的时候，博主刚刚退烧。不过即便是发烧，我们的更新还是要继续的！对于我来说，一个EFI新版本的发布要胜过病痛！！！</p>
+<p>好了，话不多说，接下来进入正题。</p>
+<h1 id="更新内容"><a href="#更新内容" class="headerlink" title="更新内容"></a>更新内容</h1><hr>
+<p>1、更新四叶草版本到4798，支持14.1和14.2的安装。</p>
+<p>2、使用VirtualSMC代替FakeSMC作为全新的SMC驱动。</p>
+<p>3、更新VoodooI2C驱动，解决了3.0 EFI 下由于VoodooI2C的内存泄漏引起的长时间使用死机崩溃问题（感谢<strong>@kprissu</strong>的修改。详情请见<a href="https://github.com/alexandred/VoodooI2C/commit/852c48f290512435c92ddaf6c33d0a468ab248ff" target="_blank" rel="noopener">这里</a>)</p>
+<p>4、更新了全新的暗黑Mojave主题（感谢<strong>@chflame</strong>的分享，原文请见<a href="http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1794804&amp;highlight=%D3%A6%BE%B0" target="_blank" rel="noopener">这里</a>)</p>
+<p>5、更新WhateverGreen、Lilu到1.2.4和1.2.8</p>
+<p>6、添加NullEthernet虚拟内建网卡，USB网卡也可以直接打开App Store。</p>
+<h1 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h1><hr>
+<p> 1、VoodooI2C驱动遗留问题（右键、“通知中心”手势）</p>
+<p>2、FaceTime黑屏问题（老生常谈）</p>
+<p>3、睡眠之后声卡问题（群友反映，放到下个版本解决）</p>
+<p>全版本下载地址：<a href="https://pan.baidu.com/s/1QcrvxI5a68eUH37RmNd-Fg#list/path=%2F" target="_blank" rel="noopener">点我下载</a></p>
+<h1 id="未来更新"><a href="#未来更新" class="headerlink" title="未来更新"></a>未来更新</h1><hr>
+<p>对于潮7000 14来说，目前基本在我能力范围的东西已经比较完美了。当然，诸如FaceTime摄像头瑕疵，还有VoodooI2C驱动问题，这目前还不在楼主的能力范围之内。</p>
+<p>“人生而有涯，而学也无涯”，我要学的还有很多。目前，我想要解决的一个重大问题就是13寸系列的适配。13寸已经很久无人更新，很多地方遗留问题。之前的热补丁更新，便是为未来13寸准备的。希望有更多人加入我的EFI的开发队伍，为更多黑果果友们造福！！！</p>
+<hr>
+<p> 今天的更新到这就结束了。欢迎大家加入潮7000的交流群：<strong>729420933</strong>，跟我们分享你的使用心得，加入我们的开发队伍，享受最新的测试版本，体验最新的功能！</p>
+<hr>
+<p><strong>2019，祝大家，新年，新气象！！！</strong></p>
+
+  </section>
+
+ 
+  <div class="passage-end-tag">
+        <div style="text-align:center;color: #0A4664;font-size:18px;">-------------本文已结束，<i class="fa fa-paw"></i>感谢您的阅读！！！-------------</div>
+</div>
+
+
+  
+<section class="post-donate">
+
+  <!-- css -->
+  <style type="text/css">
+    .center {
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    .donate_bar a.btn_donate{
+      display: inline-block;
+      width: 82px;
+      height: 82px;
+      background: url("/images/btn_reward.gif") no-repeat;
+      _background: url("/images/btn_reward.gif") no-repeat;
+      <!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
+           因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，
+         为了在让打赏按钮显示效果正常 而 添加了以下几行 css，
+         嵌入其它博客时不一定要它们。 -->
+      -webkit-transition: background 0s;
+      -moz-transition: background 0s;
+      -o-transition: background 0s;
+      -ms-transition: background 0s;
+      transition: background 0s;
+      <!-- /让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
+    }
+    .donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
+    .donate_bar .donate_txt {
+      display: block;
+      color: #9d9d9d;
+      font: 14px/2 "Microsoft Yahei";
+    }
+    .bold{ font-weight: bold; }
+  </style>
+  <!-- /css -->
+  <!-- Donate Module -->
+  <div id="donate_module">
+  <!-- btn_donate & tips -->
+    <div id="donate_board" class="donate_bar center">
+      
+      <a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
+      <span class="donate_txt">
+        更新文章不容易，打赏是最大鼓励！
+      </span> 
+    </div>
+    <!-- /btn_donate & tips -->
+    <!-- donate guide -->
+    
+    <div id="donate_guide" class="donate_bar center hidden">
+      <a href="/images/wechat.jpg" title="用微信扫一扫" class="fancybox" rel="article0">
+        <img src="/images/wechat.jpg" title="微信打赏" height="190px" width="auto">
+      </a>
+        
+      &nbsp;&nbsp;
+      <a href="/images/alipay.jpg" title="用支付宝扫一扫" class="fancybox" rel="article0">
+        <img src="/images/alipay.jpg" title="支付宝打赏" height="190px" width="auto">
+      </a>
+      <span class="donate_txt">
+        更新文章不容易，打赏是最大鼓励！
+      </span>
+    </div>
+    <!-- /donate guide -->
+    <!-- donate script -->
+    <script type="text/javascript">
+      document.getElementById('btn_donate').onclick = function() {
+        $('#donate_board').addClass('hidden');
+        $('#donate_guide').removeClass('hidden');
+      }
+      function donate_on_web(){
+        $('#donate').submit();
+      }
+      var original_window_onload = window.onload;
+      window.onload = function () {
+        if (original_window_onload) {
+          original_window_onload();
+        }
+        document.getElementById('donate_board_wdg').className = 'hidden';
+      }
+    </script>
+    <!-- /donate script -->
+  </div>
+  <!-- /Donate Module -->
+
+</section>
+
+
+  
+  <section class="post-comments">
+    <div id="vcomments"></div>   
+    <script src="/js/av-min.js"></script>    
+    <script src="/js/Valine.min.js"></script>    
+    <script>        
+        new Valine({
+            el: '#vcomments',
+            appId: 'nNNIvX6ymufNrHBHNb7D3hU8-gzGzoHsz',
+            appKey: 'uKc4MqLKOEiLUcKat1Yafu0j',	    
+            placeholder: ' 不登录也来留下属于你的足迹吧~ ', 
+            visitor: 'true'  
+        })
+    </script>
+</section>
+  
+
+
+</article>
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2018. | 澎湖冰洲 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+    <!-- 背景的nest动画相关片段 -->
+    
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

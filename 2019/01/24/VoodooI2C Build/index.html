@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      VoodooI2C编译教程 | 望海之洲 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="John Doe">
+    
+    
+
+    <meta name="description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
+<meta name="keywords" content="编译,I2C,驱动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VoodooI2C编译教程 | 望海之洲">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/VoodooI2C Build/index.html">
+<meta property="og:site_name" content="望海之洲">
+<meta property="og:description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/亚历山大.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/源.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/源码.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/下载.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/打开.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/删除.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/building.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/成功.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/展开.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/驱动.png">
+<meta property="og:updated_time" content="2019-02-06T05:52:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VoodooI2C编译教程 | 望海之洲">
+<meta name="twitter:description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/亚历山大.png">
+    
+    
+      <link rel="alternate" href="/atom.xml" title="望海之洲" type="application/atom+xml">
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for 望海之洲"><img src="/avatar.png" width="80" alt="望海之洲 logo" class="panel-cover__logo logo"></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">望海之洲</a></h1>
+        <hr class="panel-cover__divider">
+
+        
+        <p class="panel-cover__description">
+          澎湖冰洲的极客地带
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">总览</a></li>
+              
+                
+                <li class="navigation__item"><a href="/resources" title="" class="">资源</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/penghubingzhou" title="Huno on GitHub">
+          <i class="icon icon-social-github"></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">VoodooI2C编译教程</h1>
+
+    
+    <div class="post-meta">
+      <time datetime="2019-01-24" class="post-meta__date date">2019-01-24</time> 
+      <span class="post-meta__tags tags">
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/教程/">教程</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/I2C/">I2C</a>, <a class="tags-link" href="/tags/编译/">编译</a>, <a class="tags-link" href="/tags/驱动/">驱动</a>
+            </font>
+          
+      </span>
+
+      <span class="post-meta__wordcount wordcount">
+      <font class="wordcount">
+      &#8227; 文章字数:
+      841
+      </font> 
+      </span>
+    
+    </div>
+    
+  </header>
+
+
+  <section id="post-content" class="article-content post">
+    <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本文由本人原创，教程已首发黑苹果乐园下，<a href="https://imac.hk/build-voodooi2c-kext.html" target="_blank" rel="noopener">点击这里查看</a>。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。</p>
+<p>当然对于大多数小白而言，编译驱动似乎遥不可及，甚至是天方夜谭。不过我想说的是，不要自己吓自己。接下来，我就来告诉各位小白：编译并用上最新的VoodooI2C，其实没那么难……</p>
+<h1 id="安装相关环境"><a href="#安装相关环境" class="headerlink" title="安装相关环境"></a>安装相关环境</h1><p>编译任何Mac驱动，我们都离不开Xcode工具，它是我们编译驱动的好帮手。下载Xcode十分简单，只需要在Mac App Store搜索并下载即可。当然了，如果你的黑果尚不能访问App Store，你也可以点击<a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">这里</a>下载。</p>
+<p>注意在这里下载前，要先注册一个Apple ID。</p>
+<h1 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h1><p>VoodooI2C项目由本体以及依赖和目标驱动三块组成。为了管理方便，作者亚历山大将其使用Submodule分割在了不同的仓库里。当我们编译的时候，就需要保证它们都在正确的位置才可以正常编译。</p>
+<p>由于操作命令行终端对于大多数小白是困难的，所以我这里不介绍如何使用git同步源码了，这里只介绍如何去github页面下载。</p>
+<p>以VoodooI2C的下载为例：</p>
+<p>1、 进入<a href="https://github.com/alexandred" target="_blank" rel="noopener">亚历山大的github源</a>(不得不说我亚历山大长得蛮帅的~)</p>
+<p><img src="/2019/01/24/VoodooI2C Build/亚历山大.png" alt="img"></p>
+<p>2、点击repositories </p>
+<p><img src="/2019/01/24/VoodooI2C Build/源.png" alt="img"></p>
+<p>2、 点击VoodooI2C进入，就可以看到源码以及说明</p>
+<p><img src="/2019/01/24/VoodooI2C Build/源码.png" alt="img"></p>
+<p>3、 按照图示，依次点击下载</p>
+<p><img src="/2019/01/24/VoodooI2C Build/下载.png" alt="img"></p>
+<p>等待下载完成后，我们就可以得到一份VoodooI2C源码了。</p>
+<p>同样地，依照此法，我们下载VoodooGPIO以及你的目标驱动源码。需要注意，下载得到的文件夹，要去掉-master后缀，对应放入VoodooI2C的文件夹下（VoodooGPIO放入dependencies，目标驱动放入VoodooI2C Satellite）。弹出替换提示不用管，直接替换就好。这样，我们待编译的源码就准备完毕了。</p>
+<h1 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h1><p>接下来，我们用Xcode打开源码文件夹根目录的VoodooI2C.xcworkspace文件。此时会弹出一个英文对话框，提示你此项目为网上下载，是否打开。点击open打开。</p>
+<p><img src="/2019/01/24/VoodooI2C Build/打开.png" alt="img"></p>
+<p>然后，我们需要删除两个关键的条目来保证编译成功。点击左侧VoodooI2C蓝色项目，然后在右侧点击Build Phases。</p>
+<p><img src="/2019/01/24/VoodooI2C Build/删除.png" alt="img"></p>
+<p>图中画圈的两个条目我们不需要，删除它。然后我们点击左上角的编译按钮（一个类似播放的图标），驱动源码就会开始编译。</p>
+<p><img src="/2019/01/24/VoodooI2C Build/building.jpg" alt="img"></p>
+<p>当显示build succeed  时，我们编译成功</p>
+<p><img src="/2019/01/24/VoodooI2C Build/成功.jpg" alt="img"></p>
+<p>接下来，展开左侧窗格的product文件夹</p>
+<p><img src="/2019/01/24/VoodooI2C Build/展开.png" alt="img"></p>
+<p>右击VoodooI2C.kext，选择show in finder，就可以看见编译好的驱动。</p>
+<p><img src="/2019/01/24/VoodooI2C Build/驱动.png" alt="img"></p>
+<p>到这里，我们的编译就算完成了，尽情享用你的新驱动吧~</p>
+
+  </section>
+
+ 
+  <div class="passage-end-tag">
+        <div style="text-align:center;color: #0A4664;font-size:18px;">-------------本文已结束，<i class="fa fa-paw"></i>感谢您的阅读！！！-------------</div>
+</div>
+
+
+  
+<section class="post-donate">
+
+  <!-- css -->
+  <style type="text/css">
+    .center {
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    .donate_bar a.btn_donate{
+      display: inline-block;
+      width: 82px;
+      height: 82px;
+      background: url("/images/btn_reward.gif") no-repeat;
+      _background: url("/images/btn_reward.gif") no-repeat;
+      <!-- http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif
+           因为本 hexo 生成的博客所用的 theme 的 a:hover 带动画效果，
+         为了在让打赏按钮显示效果正常 而 添加了以下几行 css，
+         嵌入其它博客时不一定要它们。 -->
+      -webkit-transition: background 0s;
+      -moz-transition: background 0s;
+      -o-transition: background 0s;
+      -ms-transition: background 0s;
+      transition: background 0s;
+      <!-- /让打赏按钮的效果显示正常 而 添加的几行 css 到此结束 -->
+    }
+    .donate_bar a.btn_donate:hover{ background-position: 0px -82px;}
+    .donate_bar .donate_txt {
+      display: block;
+      color: #9d9d9d;
+      font: 14px/2 "Microsoft Yahei";
+    }
+    .bold{ font-weight: bold; }
+  </style>
+  <!-- /css -->
+  <!-- Donate Module -->
+  <div id="donate_module">
+  <!-- btn_donate & tips -->
+    <div id="donate_board" class="donate_bar center">
+      
+      <a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
+      <span class="donate_txt">
+        更新文章不容易，打赏是最大鼓励！
+      </span> 
+    </div>
+    <!-- /btn_donate & tips -->
+    <!-- donate guide -->
+    
+    <div id="donate_guide" class="donate_bar center hidden">
+      <a href="/images/wechat.jpg" title="用微信扫一扫" class="fancybox" rel="article0">
+        <img src="/images/wechat.jpg" title="微信打赏" height="190px" width="auto">
+      </a>
+        
+      &nbsp;&nbsp;
+      <a href="/images/alipay.jpg" title="用支付宝扫一扫" class="fancybox" rel="article0">
+        <img src="/images/alipay.jpg" title="支付宝打赏" height="190px" width="auto">
+      </a>
+      <span class="donate_txt">
+        更新文章不容易，打赏是最大鼓励！
+      </span>
+    </div>
+    <!-- /donate guide -->
+    <!-- donate script -->
+    <script type="text/javascript">
+      document.getElementById('btn_donate').onclick = function() {
+        $('#donate_board').addClass('hidden');
+        $('#donate_guide').removeClass('hidden');
+      }
+      function donate_on_web(){
+        $('#donate').submit();
+      }
+      var original_window_onload = window.onload;
+      window.onload = function () {
+        if (original_window_onload) {
+          original_window_onload();
+        }
+        document.getElementById('donate_board_wdg').className = 'hidden';
+      }
+    </script>
+    <!-- /donate script -->
+  </div>
+  <!-- /Donate Module -->
+
+</section>
+
+
+  
+  <section class="post-comments">
+    <div id="vcomments"></div>   
+    <script src="/js/av-min.js"></script>    
+    <script src="/js/Valine.min.js"></script>    
+    <script>        
+        new Valine({
+            el: '#vcomments',
+            appId: 'nNNIvX6ymufNrHBHNb7D3hU8-gzGzoHsz',
+            appKey: 'uKc4MqLKOEiLUcKat1Yafu0j',	    
+            placeholder: ' 不登录也来留下属于你的足迹吧~ ', 
+            visitor: 'true'  
+        })
+    </script>
+</section>
+  
+
+
+</article>
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2018. | 澎湖冰洲 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+    <!-- 背景的nest动画相关片段 -->
+    
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
