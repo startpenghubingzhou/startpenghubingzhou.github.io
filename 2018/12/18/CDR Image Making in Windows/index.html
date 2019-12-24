@@ -24,19 +24,19 @@
 <meta property="og:site_name" content="望海之洲">
 <meta property="og:description" content="前言 此教程是远景帖子的同步更新篇，详细讲述如何在Win下制作硬盘安装镜像。 CDR懒人安装镜像的优点是方便快捷，并且能写入硬盘，安装速度快。在11以前MBR大行其道的时代尚且具有不可比拟的优势，在现在固态GPT的时代也一样大有前途（尤其是在USB3.0与黑果存在问题的时候，一个硬盘安装可以节省出一大堆宝贵的时间来）。 其实最开始，我已经摸索到如何制作CDR镜像，并且实现了在Win下硬盘安装镜像的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/软碟通.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/打开.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/点击.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/对话框.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/开始转换.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/转换完成.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/转换好的镜像.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/cdr后缀.png">
-<meta property="og:updated_time" content="2019-02-06T05:51:40.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E8%BD%AF%E7%A2%9F%E9%80%9A.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E6%89%93%E5%BC%80.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E7%82%B9%E5%87%BB.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E5%AF%B9%E8%AF%9D%E6%A1%86.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E5%BC%80%E5%A7%8B%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E8%BD%AC%E6%8D%A2%E5%AE%8C%E6%88%90.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E8%BD%AC%E6%8D%A2%E5%A5%BD%E7%9A%84%E9%95%9C%E5%83%8F.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/cdr%E5%90%8E%E7%BC%80.png">
+<meta property="og:updated_time" content="2019-12-24T08:29:32.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Win下CDR懒人硬盘安装镜像制作教程 | 望海之洲">
 <meta name="twitter:description" content="前言 此教程是远景帖子的同步更新篇，详细讲述如何在Win下制作硬盘安装镜像。 CDR懒人安装镜像的优点是方便快捷，并且能写入硬盘，安装速度快。在11以前MBR大行其道的时代尚且具有不可比拟的优势，在现在固态GPT的时代也一样大有前途（尤其是在USB3.0与黑果存在问题的时候，一个硬盘安装可以节省出一大堆宝贵的时间来）。 其实最开始，我已经摸索到如何制作CDR镜像，并且实现了在Win下硬盘安装镜像的">
-<meta name="twitter:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/软碟通.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/18/CDR%20Image%20Making%20in%20Windows/%E8%BD%AF%E7%A2%9F%E9%80%9A.png">
     
     
       <link rel="alternate" href="/atom.xml" title="望海之洲" type="application/atom+xml">
@@ -234,7 +234,7 @@ classes that you can use:
       <span class="post-meta__wordcount wordcount">
       <font class="wordcount">
       &#8227; 文章字数:
-      712
+      740
       </font> 
       </span>
     
@@ -253,25 +253,26 @@ classes that you can use:
 <p>好东西当然要大家一起分享，现在就分享出我的方法。</p>
 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><hr>
 <p>其实方法本身简单易懂，首先你要下载最新的3519版软碟通并安装（<a href="https://cn.ultraiso.net/xiazai.html" target="_blank" rel="noopener">下载地址点这里</a>），打开“关于”之后应该是这个样子的：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/软碟通.png" alt="软碟通.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E8%BD%AF%E7%A2%9F%E9%80%9A.png" alt="软碟通"> </p>
 <p>然后打开你的DMG镜像（这里我以小兵14.1镜像为例）：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/打开.png" alt="打开.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E6%89%93%E5%BC%80.png" alt="打开"> </p>
 <p>然后我们点击菜单里的“工具”——“转换”：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/点击.jpg" alt="点击.jpg"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E7%82%B9%E5%87%BB.jpg" alt="点击.jpg"> </p>
 <p>弹出如下界面：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/对话框.png" alt="对话框.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E5%AF%B9%E8%AF%9D%E6%A1%86.png" alt="对话框.png"> </p>
 <p><strong>敲黑板：输出格式这里我们一定要选择ISO格式！（事实上，就目前的镜像而言，苹果的CDR格式仍然是遵从了ISO压缩标准，因此转换为CDR，实质就是转化为ISO）</strong></p>
 <p>选择完成后，然后我们点转换，镜像将开始转换：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/开始转换.png" alt="开始转换.png"> </p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/转换完成.png" alt="转换完成.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E5%BC%80%E5%A7%8B%E8%BD%AC%E6%8D%A2.png" alt="开始转换.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E8%BD%AC%E6%8D%A2%E5%AE%8C%E6%88%90.png" alt="转换完成.png"> </p>
 <p>出现上面的转换完成对话框之后，我们可以在输出目录找到你的转好好的ISO镜像：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/转换好的镜像.png" alt="转换好的镜像.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/%E8%BD%AC%E6%8D%A2%E5%A5%BD%E7%9A%84%E9%95%9C%E5%83%8F.png" alt="转换好的镜像.png"> </p>
 <p>画圈的是转换好的ISO镜像，现在将镜像的后缀名改为CDR，像这样：</p>
-<p><img src="/2018/12/18/CDR Image Making in Windows/cdr后缀.png" alt="cdr后缀.png"> </p>
+<p><img src="/2018/12/18/CDR Image Making in Windows/cdr%E5%90%8E%E7%BC%80.png" alt="cdr后缀.png"> </p>
 <p>现在这个镜像已经转换完成了，你现在可以进行硬盘安装了。</p>
 <p><strong>注意：</strong></p>
 <p><strong>1、转换好的镜像仍然允许你使用Transmac写入U盘，但不支持etcher写入。</strong></p>
 <p><strong>2、使用7Zip，你可以提取镜像中的EFI分区（里面会以EFI partition.img的形式存在）。</strong></p>
+<p>在<a href="https://www.penghubingzhou.cn/resources/" target="_blank" rel="noopener">我的资源</a>里，有关于制作好的相关资源分享，大家可自行前往查找！</p>
 <hr>
 
   </section>

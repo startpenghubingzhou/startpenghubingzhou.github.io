@@ -24,21 +24,21 @@
 <meta property="og:site_name" content="望海之洲">
 <meta property="og:description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/亚历山大.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/源.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/源码.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/下载.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/打开.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/删除.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%BA%90.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%BA%90%E7%A0%81.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E4%B8%8B%E8%BD%BD.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%89%93%E5%BC%80.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E5%88%A0%E9%99%A4.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/building.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/成功.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/展开.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/驱动.png">
-<meta property="og:updated_time" content="2019-02-06T05:52:39.000Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E5%B1%95%E5%BC%80.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E9%A9%B1%E5%8A%A8.png">
+<meta property="og:updated_time" content="2019-12-24T08:35:00.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VoodooI2C编译教程 | 望海之洲">
 <meta name="twitter:description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/亚历山大.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7.png">
     
     
       <link rel="alternate" href="/atom.xml" title="望海之洲" type="application/atom+xml">
@@ -255,27 +255,27 @@ classes that you can use:
 <p>由于操作命令行终端对于大多数小白是困难的，所以我这里不介绍如何使用git同步源码了，这里只介绍如何去github页面下载。</p>
 <p>以VoodooI2C的下载为例：</p>
 <p>1、 进入<a href="https://github.com/alexandred" target="_blank" rel="noopener">亚历山大的github源</a>(不得不说我亚历山大长得蛮帅的~)</p>
-<p><img src="/2019/01/24/VoodooI2C Build/亚历山大.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7.png" alt="img"></p>
 <p>2、点击repositories </p>
-<p><img src="/2019/01/24/VoodooI2C Build/源.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E6%BA%90.png" alt="img"></p>
 <p>2、 点击VoodooI2C进入，就可以看到源码以及说明</p>
-<p><img src="/2019/01/24/VoodooI2C Build/源码.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E6%BA%90%E7%A0%81.png" alt="img"></p>
 <p>3、 按照图示，依次点击下载</p>
-<p><img src="/2019/01/24/VoodooI2C Build/下载.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E4%B8%8B%E8%BD%BD.png" alt="img"></p>
 <p>等待下载完成后，我们就可以得到一份VoodooI2C源码了。</p>
 <p>同样地，依照此法，我们下载VoodooGPIO以及你的目标驱动源码。需要注意，下载得到的文件夹，要去掉-master后缀，对应放入VoodooI2C的文件夹下（VoodooGPIO放入dependencies，目标驱动放入VoodooI2C Satellite）。弹出替换提示不用管，直接替换就好。这样，我们待编译的源码就准备完毕了。</p>
 <h1 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h1><p>接下来，我们用Xcode打开源码文件夹根目录的VoodooI2C.xcworkspace文件。此时会弹出一个英文对话框，提示你此项目为网上下载，是否打开。点击open打开。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/打开.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E6%89%93%E5%BC%80.png" alt="img"></p>
 <p>然后，我们需要删除两个关键的条目来保证编译成功。点击左侧VoodooI2C蓝色项目，然后在右侧点击Build Phases。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/删除.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E5%88%A0%E9%99%A4.png" alt="img"></p>
 <p>图中画圈的两个条目我们不需要，删除它。然后我们点击左上角的编译按钮（一个类似播放的图标），驱动源码就会开始编译。</p>
 <p><img src="/2019/01/24/VoodooI2C Build/building.jpg" alt="img"></p>
 <p>当显示build succeed  时，我们编译成功</p>
-<p><img src="/2019/01/24/VoodooI2C Build/成功.jpg" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E6%88%90%E5%8A%9F.jpg" alt="img"></p>
 <p>接下来，展开左侧窗格的product文件夹</p>
-<p><img src="/2019/01/24/VoodooI2C Build/展开.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E5%B1%95%E5%BC%80.png" alt="img"></p>
 <p>右击VoodooI2C.kext，选择show in finder，就可以看见编译好的驱动。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/驱动.png" alt="img"></p>
+<p><img src="/2019/01/24/VoodooI2C Build/%E9%A9%B1%E5%8A%A8.png" alt="img"></p>
 <p>到这里，我们的编译就算完成了，尽情享用你的新驱动吧~</p>
 
   </section>

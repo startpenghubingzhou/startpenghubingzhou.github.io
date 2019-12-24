@@ -17,7 +17,7 @@
     
 
     <meta name="description" content="本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就能用了的小小小白 VoodoI2C 不同于任何一个其他的黑苹果驱动，直接将驱动放入 Clover 或者 L/">
-<meta name="keywords" content="I2C,DSDT,触摸板">
+<meta name="keywords" content="DSDT,I2C,触摸板">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VoodooI2C触摸设备驱动教程补充 | 望海之洲">
 <meta property="og:url" content="http://yoursite.com/2019/07/24/VoodooI2C DSDT Edit FAQ/index.html">
@@ -295,7 +295,8 @@ classes that you can use:
 <li>仔细阅读下文的👇<code>触摸板专有词汇集合</code>没什么你搞不懂的🤨。</li>
 </ul>
 </li>
-<li>Dalao! IORegisteryExplorer 里面触摸板设备名称里面没有 IOInterruptSpecifiers ，怎么办？<ul>
+<li><p>Dalao! IORegisteryExplorer 里面触摸板设备名称里面没有 IOInterruptSpecifiers ，怎么办？</p>
+<ul>
 <li>确保你没有安装 VoodooI2C。</li>
 <li>如果在没有安装 VoodooI2C 时依然没有这就说明你无需对 DSDT 进行修改！你的运气帮了你一个大忙。不过也有极少数的例外，而且处理较为复杂，<a href="https://github.com/williambj1/VoodooI2C-PreRelease/blob/master/%E8%A7%A6%E6%91%B8%E6%9D%BF%E8%A1%A5%E5%85%85.md#dsdt-%E8%A7%A6%E6%91%B8%E6%9D%BF%E9%83%A8%E5%88%86%E8%AF%A6%E8%A7%A3" target="_blank" rel="noopener">请阅读此处（4. 例外 1）来通过 Windows 确认你的 Pin 值</a>，这需要你打包求助，由我们来为你解决。</li>
 </ul>
@@ -307,7 +308,8 @@ classes that you can use:
 </li>
 <li><p>Dalao! 什么是轮询？什么是中断？</p>
 <ul>
-<li>现实中的中断和轮询可以看看这个👉<a href="https://baike.baidu.com/item/%E8%BD%AE%E8%AF%A2%E5%92%8C%E4%B8%AD%E6%96%AD/267433?fr=aladdin" target="_blank" rel="noopener">🚪</a>。</li>
+<li><p>现实中的中断和轮询可以看看这个👉<a href="https://baike.baidu.com/item/%E8%BD%AE%E8%AF%A2%E5%92%8C%E4%B8%AD%E6%96%AD/267433?fr=aladdin" target="_blank" rel="noopener">🚪</a>。</p>
+</li>
 <li><p>在触摸板上，我们这样定义：</p>
 <blockquote>
 <p>轮询就是每隔一个特定的时间扫描一次触摸板的状态，然后改变鼠标指针坐标。<br>中断则是你触摸板的正常工作方式 (Windows / Linux 中即是如此)。</p>
@@ -335,7 +337,8 @@ classes that you can use:
 <li>请看下方的 DSDT 触摸板部分详解👇</li>
 </ul>
 </li>
-<li>Dalao! APIC 中断和 GPIO 中断有什么区别？<ul>
+<li><p>Dalao! APIC 中断和 GPIO 中断有什么区别？</p>
+<ul>
 <li>两者使用不同的控制器</li>
 <li>APIC 中断省时省力，但是要看看你有没有这个福气了</li>
 <li>GPIO 则需要 VoodooGPIO (已包含在VoodooI2C中作为插件) 来启用 GPIO 控制器，同时也需要对 DSDT 进行相对复杂的修改（其实很简单）</li>
@@ -378,7 +381,8 @@ classes that you can use:
 <p>I2C 通道的触摸板，请使用 VoodooI2C</p>
 </blockquote>
 </li>
-<li>先暂时想到这么多。。。。</li>
+<li><p>先暂时想到这么多。。。。</p>
+</li>
 </ol>
 <h2 id="触摸板必备软件集合-均在群文件中"><a href="#触摸板必备软件集合-均在群文件中" class="headerlink" title="触摸板必备软件集合(均在群文件中)"></a>触摸板必备软件集合(均在群文件中)</h2><ul>
 <li>MaciASL – 用于修改 DSDT</li>
@@ -400,11 +404,14 @@ classes that you can use:
 </li>
 <li><p>应用所需的补丁，并按下编译，查看是否有错误，如有错误，请打包求助</p>
 </li>
-<li>移除 SBFI，或者有的 DSDT 的 SBFI 内容内嵌于 SBFB，请删除其中的代码</li>
-<li>如果你的 DSDT 里本身就有 SBFG 且 <code>Pin List</code> 下方的内容不为零，那么直接跳到本小节的第 6 步，如果没有，请继续往下看</li>
+<li><p>移除 SBFI，或者有的 DSDT 的 SBFI 内容内嵌于 SBFB，请删除其中的代码</p>
+</li>
+<li><p>如果你的 DSDT 里本身就有 SBFG 且 <code>Pin List</code> 下方的内容不为零，那么直接跳到本小节的第 6 步，如果没有，请继续往下看</p>
+</li>
 <li><p>如果您没有 SBFG，请复制如下代码手动添加</p>
 <p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/NO-SBFG.png" alt="NO-SBFG">  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> Name (SBFG, ResourceTemplate ()</span><br><span class="line">&#123;</span><br><span class="line">    GpioInt (Level, ActiveLow, ExclusiveAndWake, PullDefault, 0x0000,</span><br><span class="line">        &quot;\\_SB.PCI0.GPI0&quot;, 0x00, ResourceConsumer, ,</span><br><span class="line">        )</span><br><span class="line">        &#123;   // Pin list</span><br><span class="line">            0x修改</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>添加完和上面一样就好了</p>
 </li>
 <li><p>确定 GPIO Pin，按照群主博客指示查找你的 GPIO Pin，把 <code>修改</code> 改成你的值(有的时候转化出来的值不止一个，请制作两份文件依次尝试)。</p>
@@ -441,15 +448,18 @@ classes that you can use:
 </li>
 <li><p>有的 DSDT 里，<code>SBFB</code>, <code>SBFG</code>, <code>SBFI</code> 这些值不仅设备的根目录里有，<code>CRS</code> 方法中也有，与常规的结构大有不同，这种情况就需要你灵活变通理解到底那个起作用，通常情况下修改 <code>CRS</code> 方法里的就可以了，如果你多次尝试还是搞不定，请打包求助。</p>
 </li>
-<li>有的 DSDT 更加让人摸不着头脑🧠，除了有 <code>SBFB</code>, <code>SBFG</code>, <code>SBFI</code>，还有 <code>SBFS</code>, <code>SBFF</code>, <code>SBFE</code> 等等，仔细观察你会发现，这些例外里的内容和 <code>SBFB</code> 里的内容几乎一摸一样，这就说明他们是和 <code>SBFB</code> 是起到相同作用的，只是设备地址不同，因此，如果 <code>CRS</code> 方法里如果有大量的条件语句，你只要把 (SBF <strong>(X)</strong>,SBFI) 改成 (SBF <strong>(X)</strong>,SBFG) 即可，假如你的 <code>CRS</code> 里只有一个简单的返回 (SBF <strong>(X)</strong>,SBFI)，你则需要创建多个文件，分别尝试不同的 (SBF <strong>(X)</strong>,SBF<strong>G</strong>)。</li>
+<li><p>有的 DSDT 更加让人摸不着头脑🧠，除了有 <code>SBFB</code>, <code>SBFG</code>, <code>SBFI</code>，还有 <code>SBFS</code>, <code>SBFF</code>, <code>SBFE</code> 等等，仔细观察你会发现，这些例外里的内容和 <code>SBFB</code> 里的内容几乎一摸一样，这就说明他们是和 <code>SBFB</code> 是起到相同作用的，只是设备地址不同，因此，如果 <code>CRS</code> 方法里如果有大量的条件语句，你只要把 (SBF <strong>(X)</strong>,SBFI) 改成 (SBF <strong>(X)</strong>,SBFG) 即可，假如你的 <code>CRS</code> 里只有一个简单的返回 (SBF <strong>(X)</strong>,SBFI)，你则需要创建多个文件，分别尝试不同的 (SBF <strong>(X)</strong>,SBF<strong>G</strong>)。</p>
+</li>
 </ul>
 </li>
 </ol>
 <h2 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h2><h3 id="I-五国"><a href="#I-五国" class="headerlink" title="I. 五国"></a>I. 五国</h3><ul>
 <li><p>由于五国状况复杂这里只提供一个能减少五国概率的方法，如果还是一样，请拍照发群里</p>
 <ol>
-<li>打开 VoodooI2C.kext⁩ ▸ 右键 ▸ 显示包内容 ▸ ⁨Contents⁩ ▸ Info.plist (用 Xcode, PlistEdit Pro 或者 VS Code 打开 <strong>千万别用 Clover Configurator</strong>) 这里以 VS Code 为例</li>
-<li>⌘ + F 搜索 <code>&lt;string&gt;VoodooI2CPCIController&lt;/string&gt;</code></li>
+<li><p>打开 VoodooI2C.kext⁩ ▸ 右键 ▸ 显示包内容 ▸ ⁨Contents⁩ ▸ Info.plist (用 Xcode, PlistEdit Pro 或者 VS Code 打开 <strong>千万别用 Clover Configurator</strong>) 这里以 VS Code 为例</p>
+</li>
+<li><p>⌘ + F 搜索 <code>&lt;string&gt;VoodooI2CPCIController&lt;/string&gt;</code></p>
+</li>
 <li><p>往下翻一点找到这些</p>
 <figure class="highlight plist"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,9d60<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,9d61<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,9d62<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,9d63<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,9de8<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,9de9<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,a160<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,a161<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,a162<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,a368<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>pci8086,a369<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -461,16 +471,21 @@ classes that you can use:
 </ul>
 <h3 id="II-学会使用-maclog-提取日志"><a href="#II-学会使用-maclog-提取日志" class="headerlink" title="II. 学会使用 maclog 提取日志"></a>II. 学会使用 maclog 提取日志</h3><p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/maclog.png" alt="maclog"></p>
 <ul>
-<li>下载完后双击解压</li>
-<li>双击运行，程序会先调用终端，接着会弹出来 <strong>“魔改过的”</strong> 控制台日志窗口</li>
+<li><p>下载完后双击解压</p>
+</li>
+<li><p>双击运行，程序会先调用终端，接着会弹出来 <strong>“魔改过的”</strong> 控制台日志窗口</p>
+</li>
 <li><p>在右上角的搜索栏中搜索 <code>Voodoo</code></p>
 <p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Voodoo.png" alt="Voodoo"></p>
 </li>
 <li><p>将文本复制粘贴到记事本中</p>
 </li>
-<li>再在右上角的搜索栏中搜索 <strong>你的设备名</strong> ，比如 <code>ETPD</code>, <code>TPAD</code>, <code>TPD0</code></li>
-<li>将文本复制粘贴到记事本中</li>
-<li>保存好文本文档</li>
+<li><p>再在右上角的搜索栏中搜索 <strong>你的设备名</strong> ，比如 <code>ETPD</code>, <code>TPAD</code>, <code>TPD0</code></p>
+</li>
+<li><p>将文本复制粘贴到记事本中</p>
+</li>
+<li><p>保存好文本文档</p>
+</li>
 </ul>
 <h3 id="III-确保你使用了正确-VoodooI2C-及附属驱动，不能多也不能少"><a href="#III-确保你使用了正确-VoodooI2C-及附属驱动，不能多也不能少" class="headerlink" title="III. 确保你使用了正确 VoodooI2C 及附属驱动，不能多也不能少"></a>III. 确保你使用了正确 <code>VoodooI2C</code> 及附属驱动，不能多也不能少</h3><h3 id="IV-查看-IORegisteryExplorer-里-VoodooI2C-是否正常加载"><a href="#IV-查看-IORegisteryExplorer-里-VoodooI2C-是否正常加载" class="headerlink" title="IV. 查看 IORegisteryExplorer 里 VoodooI2C 是否正常加载"></a>IV. 查看 <code>IORegisteryExplorer</code> 里 <code>VoodooI2C</code> 是否正常加载</h3><ol>
 <li><p>不正常1:</p>
@@ -485,7 +500,12 @@ classes that you can use:
 <p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Disable2.png" alt="Disable-XCode"></p>
 </li>
 <li><p>文本法</p>
-<details><br><summary>（点击此处以展开）</summary><br><br> <figure class="highlight plist"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>KextsToPatch<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Comment<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>Disable AppleIntelLpssI2C (credit by Coolstar)    <span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Disabled<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Find<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXQ=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>InfoPlistPatch<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>AppleIntelLpssI2C<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Replace<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXM=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Comment<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>Disable AppleIntelLpssI2CCOntroller (credit by     Coolstar)<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Disabled<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Find<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXQ=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>InfoPlistPatch<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>AppleIntelLpssI2CController<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Replace<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXM=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br></details>
+<details>
+<summary>（点击此处以展开）</summary>
+
+ <figure class="highlight plist"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>KextsToPatch<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Comment<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>Disable AppleIntelLpssI2C (credit by Coolstar)    <span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Disabled<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Find<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXQ=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>InfoPlistPatch<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>AppleIntelLpssI2C<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Replace<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXM=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Comment<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>Disable AppleIntelLpssI2CCOntroller (credit by     Coolstar)<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Disabled<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Find<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXQ=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>InfoPlistPatch<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>AppleIntelLpssI2CController<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>Replace<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">            SU9LaXM=</span><br><span class="line">            <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</details>
 </li>
 </ol>
 </li>
@@ -501,23 +521,26 @@ classes that you can use:
 <ol>
 <li><p>出现如下字样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VoodooGPIOXXX:: pin XXX cannot be used as IRQ</span><br></pre></td></tr></table></figure>
+
 <p><strong>解决方案：</strong> 你转换的 GPIO Pin 超出范围了，换另一个</p>
 </li>
 <li><p>出现如下字样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VoodooI2C:: Failed to load</span><br></pre></td></tr></table></figure>
+
 <p><strong>解决方案：</strong> 确认你使用了正确的驱动及附属驱动并且加上了屏蔽冲突驱动的补丁</p>
 </li>
 <li><p>七代设备出现如下字样，或者 CPU 占用极高</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VoodooI2CControllerDriver::pci8086,9XXX Warning: Error getting bus config, using defaults where necessary</span><br><span class="line">VoodooI2CControllerDriver::pci8086,9XXX I2C Transaction error details</span><br><span class="line">VoodooI2CControllerDriver::pci8086,9XXX lost arbitration</span><br><span class="line">VoodooI2CControllerDriver::pci8086,9XXX I2C Transaction error: 0x0e001000 - aborting</span><br><span class="line">Request for HID descriptor failed</span><br><span class="line">Request for HID descriptor failed</span><br></pre></td></tr></table></figure>
+
 <p><strong>解决方案：</strong></p>
 <p>使用 SSDT-I2CxConf 修补 I2C 速度常量 SSCN 和 FMCN</p>
 <p>使用方法  </p>
 <pre><code>1. 将 [SSDT-I2CxConf.dsl](https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/SSDT-I2CxConf.dsl) 另存为编译成 SSDT-I2CxConf.aml  
-2. 在 Clover 中添加如下重命名：
-</code></pre><p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Rename-SSCN-FMCN.png" alt="Rename SSCN FMCN"></p>
+2. 在 Clover 中添加如下重命名：</code></pre><p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Rename-SSCN-FMCN.png" alt="Rename SSCN FMCN"></p>
 <p><strong>如果依旧没有效果</strong></p>
 <p>删除上方的改动，在你的DSDT的触摸板设备上方加上这个：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Name (SSCN, Package () &#123; 528, 640, 30 &#125;)</span><br><span class="line">Name (FMCN, Package () &#123; 128, 160, 30 &#125;)</span><br></pre></td></tr></table></figure>
+
 <p><strong>像这样：</strong></p>
 <p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/7-SSCN-FMCN.png" alt="7Gen"></p>
 <p><strong>如果不理想，再尝试这个：</strong></p>
@@ -525,17 +548,19 @@ classes that you can use:
 </li>
 <li><p>八代标压设备出现如下字样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">VoodooI2CControllerNub::pci8086,aXXX SSCN not implemented in ACPI tables</span><br><span class="line">VoodooI2CControllerNub::pci8086,aXXX FMCN not implemented in ACPI tables</span><br><span class="line">VoodooI2CControllerDriver::pci8086,aXXX Warning: Error getting bus config, using defaults where necessary</span><br><span class="line">VoodooI2CControllerDriver::pci8086,a369 I2C Transaction error details</span><br><span class="line">VoodooI2CControllerDriver::pci8086,a369 slave address not acknowledged (7bit mode)</span><br><span class="line">VoodooI2CControllerDriver::pci8086,a369 I2C Transaction error: 0x08800001 - aborting</span><br><span class="line">Request for HID descriptor failed</span><br><span class="line">Could not get HID descriptor</span><br></pre></td></tr></table></figure>
+
 <p><strong>解决方案：</strong></p>
 <p>使用 SSDT-I2CxConf 修补 I2C 速度常量 SSCN 和 FMCN</p>
 <p>使用方法  </p>
 <pre><code>1. 将 [SSDT-I2CxConf.dsl](https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/SSDT-I2CxConf.dsl) 另存为编译成 SSDT-I2CxConf.aml  
-2. 在 Clover 中添加如下重命名：
-</code></pre><p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Rename-SSCN-FMCN.png" alt="Rename SSCN FMCN"></p>
+2. 在 Clover 中添加如下重命名：</code></pre><p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Rename-SSCN-FMCN.png" alt="Rename SSCN FMCN"></p>
 <p><strong>如果依旧没有效果</strong></p>
 <p>删除上方的改动，在你的DSDT的触摸板设备上方加上这个</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Method (SSCN, 0, NotSerialized)</span><br><span class="line">&#123;</span><br><span class="line">    Return (PKG3 (SSH1, SSL1, SSD1))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Method (FMCN, 0, NotSerialized)</span><br><span class="line">&#123;</span><br><span class="line">    Name (PKG, Package (0x03)</span><br><span class="line">    &#123;</span><br><span class="line">        0x0101,</span><br><span class="line">        0x012C,</span><br><span class="line">        0x62</span><br><span class="line">    &#125;)</span><br><span class="line">    Return (PKG) /* \_SB_.PCI0.I2C1.FMCN.PKG_ */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>然后在 <code>Scope (_SB.PCI0.I2C1)</code> 上面加上</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Method (PKG3, 3, Serialized)</span><br><span class="line">&#123;</span><br><span class="line">    Name (PKG, Package (0x03)</span><br><span class="line">    &#123;</span><br><span class="line">        Zero,</span><br><span class="line">        Zero,</span><br><span class="line">        Zero</span><br><span class="line">    &#125;)</span><br><span class="line">    PKG [Zero] = Arg0</span><br><span class="line">    PKG [One] = Arg1</span><br><span class="line">    PKG [0x02] = Arg2</span><br><span class="line">    Return (PKG) /* \PKG3.PKG_ */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>像这样：</strong></p>
 <p><img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/8-SSCN-FMCN.png" alt="8Gen"></p>
 </li>
@@ -550,6 +575,7 @@ classes that you can use:
 <h3 id="VI-驱动放进-Library-Extensions，然后重建缓存"><a href="#VI-驱动放进-Library-Extensions，然后重建缓存" class="headerlink" title="VI. 驱动放进 Library/Extensions，然后重建缓存"></a>VI. 驱动放进 <code>Library/Extensions</code>，然后重建缓存</h3><p>   <img src="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/L-E.png" alt="L/E"></p>
 <p>   然后打开终端，输入</p>
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kextcache -i/</span><br></pre></td></tr></table></figure>
+
 <h3 id="VII-尝试睡眠唤醒"><a href="#VII-尝试睡眠唤醒" class="headerlink" title="VII. 尝试睡眠唤醒"></a>VII. 尝试睡眠唤醒</h3><h3 id="如果还是不行，请提交一下内容"><a href="#如果还是不行，请提交一下内容" class="headerlink" title="如果还是不行，请提交一下内容"></a>如果还是不行，请提交一下内容</h3><ul>
 <li>原始 DSDT (Clover F4 的完整 ACPI 表) 一份</li>
 <li>针对触摸板修改过的 DSDT 一份</li>

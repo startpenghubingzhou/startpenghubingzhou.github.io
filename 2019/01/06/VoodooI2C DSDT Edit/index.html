@@ -17,29 +17,29 @@
     
 
     <meta name="description" content="前言这篇博客文章，是我在远景发布的教程：【他山之石，可以攻玉】黑苹果 I2C 触摸板驱动教程（分步）和【积谷于此，以至四方】黑苹果 I2C 触摸驱动教程（第二版）的姊妹篇。本博客整合了两版帖子（权且定为第三版吧，嘻嘻~）。如远景所言，这篇教程来自 Alexandred 的 VoodooI2C 驱动教程官网，本文基本忠实原文，并尽可能结合我的经验来谈如何修改 DSDT 驱动自己的 I2C 触摸板。">
-<meta name="keywords" content="I2C,DSDT,触摸板">
+<meta name="keywords" content="DSDT,I2C,触摸板">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VoodooI2C触摸板驱动教程 | 望海之洲">
 <meta property="og:url" content="http://yoursite.com/2019/01/06/VoodooI2C DSDT Edit/index.html">
 <meta property="og:site_name" content="望海之洲">
 <meta property="og:description" content="前言这篇博客文章，是我在远景发布的教程：【他山之石，可以攻玉】黑苹果 I2C 触摸板驱动教程（分步）和【积谷于此，以至四方】黑苹果 I2C 触摸驱动教程（第二版）的姊妹篇。本博客整合了两版帖子（权且定为第三版吧，嘻嘻~）。如远景所言，这篇教程来自 Alexandred 的 VoodooI2C 驱动教程官网，本文基本忠实原文，并尽可能结合我的经验来谈如何修改 DSDT 驱动自己的 I2C 触摸板。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/属性.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/BIOS设备名称.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/BIOS%E8%AE%BE%E5%A4%87%E5%90%8D%E7%A7%B0.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/iointerrupt.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/复制之后.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/修改名称.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/修改后.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/报错.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E5%A4%8D%E5%88%B6%E4%B9%8B%E5%90%8E.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E4%BF%AE%E6%94%B9%E5%90%8D%E7%A7%B0.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E4%BF%AE%E6%94%B9%E5%90%8E.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E6%8A%A5%E9%94%99.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/tpdd.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/tpdd修改.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/通过.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/tpdd%E4%BF%AE%E6%94%B9.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E9%80%9A%E8%BF%87.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/XPAD.png">
-<meta property="og:updated_time" content="2019-07-24T08:24:19.430Z">
+<meta property="og:updated_time" content="2019-12-24T08:36:21.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VoodooI2C触摸板驱动教程 | 望海之洲">
 <meta name="twitter:description" content="前言这篇博客文章，是我在远景发布的教程：【他山之石，可以攻玉】黑苹果 I2C 触摸板驱动教程（分步）和【积谷于此，以至四方】黑苹果 I2C 触摸驱动教程（第二版）的姊妹篇。本博客整合了两版帖子（权且定为第三版吧，嘻嘻~）。如远景所言，这篇教程来自 Alexandred 的 VoodooI2C 驱动教程官网，本文基本忠实原文，并尽可能结合我的经验来谈如何修改 DSDT 驱动自己的 I2C 触摸板。">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/属性.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/06/VoodooI2C%20DSDT%20Edit/%E5%B1%9E%E6%80%A7.jpg">
     
     
       <link rel="alternate" href="/atom.xml" title="望海之洲" type="application/atom+xml">
@@ -252,7 +252,7 @@ classes that you can use:
 <hr>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="参数收集"><a href="#参数收集" class="headerlink" title="参数收集"></a>参数收集</h2><p> “<strong>工欲善其事，必先利其器</strong>”。对于 I2C 触摸板来说，首先要做的是明确你的触摸板是不是 I2C 触摸板。 明确了这一点，我们才能有的放矢，根据自己触摸板类型去有针对性地驱动自己的触摸板。 </p>
 <p> 确认自己的设备是不是 I2C 设备其实很简单，在 win 下打开设备管理器，找到人体学输入设备，如果是 I2C 设备，那么现在你应该能看到一个 I2C HID(I2C USB) 设备： </p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/属性.jpg" alt="属性"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/%E5%B1%9E%E6%80%A7.jpg" alt="属性"></p>
 <p> 如果你能看到这个设备，说明你的触摸板是 I2C触摸板。否则，你的触摸板就是 PS2 类型的，请安装 <strong>VoodooPS2Controller</strong> 或者 <strong>AppleSmartTouchpad</strong>。（下载地址请参见博客的资源页面）</p>
 <p> 另外需要注意：你需要确认自己的 CPU 平台以及架构代号。一般来说，根据后面 4 位数字型号的第一位，可以推测你的 Intel CPU 为几代 CPU，以及对应的架构。目前支持的架构有这些：</p>
 <p><strong>4 - Haswell</strong></p>
@@ -273,12 +273,14 @@ classes that you can use:
 <p>1、打开设备管理器，找到 I2C HID 设备，双击打开属性 </p>
 <p>2、进入详细信息，点击下拉菜单，找到 “ BIOS 设备名称” 一项，并将它记录下来</p>
 <p>(有几个记录几个)</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/BIOS设备名称.jpg" alt="BIOS设备名称"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/BIOS%E8%AE%BE%E5%A4%87%E5%90%8D%E7%A7%B0.jpg" alt="BIOS设备名称"></p>
 <p> 这样，我们就完成了寻找对应的 ACPI 模块的操作。一般来说，I2C 触摸设备名字是这些中的一个(<strong>但并不绝对</strong>)：</p>
 <p>触摸板：</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">TPDX,</span> ELAN, SYNA, CYPR, TPAD, ETPD</span><br></pre></td></tr></table></figure>
+
 <p>触摸屏：</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">TPLX,</span> ELAN, ETPD, SYNA, ATML</span><br></pre></td></tr></table></figure>
+
 <p><strong>注意：这里的 X 代表某一个数字</strong></p>
 <hr>
 <h2 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h2><hr>
@@ -292,44 +294,42 @@ classes that you can use:
 <table>
 <thead>
 <tr>
-<th style="text-align:left">驱动名称</th>
-<th style="text-align:left">功能</th>
-<th style="text-align:left">轮询模式</th>
-<th style="text-align:left">中断模式</th>
-<th style="text-align:left">是否需要调整 IONameMatch</th>
+<th align="left">驱动名称</th>
+<th align="left">功能</th>
+<th align="left">轮询模式</th>
+<th align="left">中断模式</th>
+<th align="left">是否需要调整 IONameMatch</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>VoodooI2CELAN</strong></td>
-<td style="text-align:left">支持 ELAN 触摸板</td>
-<td style="text-align:left">❌</td>
-<td style="text-align:left">✔️</td>
-<td style="text-align:left">✔️</td>
+<tbody><tr>
+<td align="left"><strong>VoodooI2CELAN</strong></td>
+<td align="left">支持 ELAN 触摸板</td>
+<td align="left">❌</td>
+<td align="left">✔️</td>
+<td align="left">✔️</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>VoodooI2CHID</strong></td>
-<td style="text-align:left">支持大多数 I2C HID 多点触摸设备</td>
-<td style="text-align:left">✔️</td>
-<td style="text-align:left">✔️</td>
-<td style="text-align:left">❌</td>
+<td align="left"><strong>VoodooI2CHID</strong></td>
+<td align="left">支持大多数 I2C HID 多点触摸设备</td>
+<td align="left">✔️</td>
+<td align="left">✔️</td>
+<td align="left">❌</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>VoodooI2CUPDDEngine</strong></td>
-<td style="text-align:left">UPDD 多点触控引擎</td>
-<td style="text-align:left">❌</td>
-<td style="text-align:left">✔️</td>
-<td style="text-align:left">✔️</td>
+<td align="left"><strong>VoodooI2CUPDDEngine</strong></td>
+<td align="left">UPDD 多点触控引擎</td>
+<td align="left">❌</td>
+<td align="left">✔️</td>
+<td align="left">✔️</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>VoodooI2CFTE</strong></td>
-<td style="text-align:left">支持 FTE 触摸板</td>
-<td style="text-align:left">❌</td>
-<td style="text-align:left">✔️</td>
-<td style="text-align:left">✔️</td>
+<td align="left"><strong>VoodooI2CFTE</strong></td>
+<td align="left">支持 FTE 触摸板</td>
+<td align="left">❌</td>
+<td align="left">✔️</td>
+<td align="left">✔️</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <hr>
 <h1 id="准备修改"><a href="#准备修改" class="headerlink" title="准备修改"></a>准备修改</h1><h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><p> 我们修改DSDT的目的，其核心在于让驱动识别触摸板的 GPIO 控制器，从而让驱动识别触摸板。对于极少的笔记本来说（如使用 Haswell 和 Boardwell 的设备），由于 GPIO 控制器本身就已经可以驱动，所以这类设备通常不需要打补丁也可以正常使用 VoodooI2C。</p>
@@ -349,30 +349,40 @@ classes that you can use:
 <h3 id="移除-APIC-中断控制器-相关代码"><a href="#移除-APIC-中断控制器-相关代码" class="headerlink" title="移除 APIC 中断控制器 相关代码"></a>移除 APIC 中断控制器 相关代码</h3><p>VoodooI2C在以 GPIO 中断模式调用DSDT中触摸设备的_CRS方法时，一律使用 SBFG 参数而不是 SBFI 参数。因此到这里，我们需要对 CRS 方法进行修改，使其正确返回 SBFG 的值。</p>
 <p>用 MaciASL 打开你的 DSDT，然后搜索 SBFG （或者你的设备名），定位并仔细翻阅，你应该会找到一段类似于这样的代码：</p>
 <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">Method</span> <span class="params">(_CRS, 0, Serialized)</span>  // _<span class="title">CRS</span>:</span> Current Resource Settings               </span><br><span class="line"><span class="comment">&#123;                   </span></span><br><span class="line"><span class="comment">         Name (SBFI, ResourceTemplate ()                   </span></span><br><span class="line"><span class="comment">         &#123;                       </span></span><br><span class="line"><span class="comment">                   I2cSerialBusV2 (0x0015, ControllerInitiated, 0x00061A80,                           </span></span><br><span class="line"><span class="comment">                              AddressingMode7Bit, "\\_SB.PCI0.I2C1",                            </span></span><br><span class="line"><span class="comment">                              0x00, ResourceConsumer, , Exclusive,                            </span></span><br><span class="line"><span class="comment">                               )                       </span></span><br><span class="line"><span class="comment">                   Interrupt (ResourceConsumer, Level, ActiveLow, Exclusive, ,, )                        </span></span><br><span class="line"><span class="comment">                   &#123;                           </span></span><br><span class="line"><span class="comment">                               0x0000006D,                        </span></span><br><span class="line"><span class="comment">                   &#125;</span>                    </span><br><span class="line">                &#125;)                   </span><br><span class="line">                Return (SBFI)                </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>找到之后，首先要将 SBFI 更名为 SBFB，并删除下段代码：</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">                   Interrupt (ResourceConsumer, Level, ActiveLow, </span><br><span class="line"><span class="built_in">Exclusive,</span> ,, )    </span><br><span class="line">				   &#123;        </span><br><span class="line"><span class="built_in">								0x0000006D,</span>    </span><br><span class="line">				   &#125;</span><br></pre></td></tr></table></figure>
+
 <p>比如以我的为例子：</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> Name (SBFB, ResourceTemplate ()</span><br><span class="line"> &#123;</span><br><span class="line">                    I2cSerialBusV2 (<span class="number">0</span>x0000, ControllerInitiated, <span class="number">0</span>x00061A80,</span><br><span class="line"><span class="built_in">                         AddressingMode7Bit,</span> <span class="string">"\\_SB.PCI0.I2C0"</span>,</span><br><span class="line"><span class="built_in">                        0x00,</span> ResourceConsumer, _Y2A, Exclusive,</span><br><span class="line">                        )</span><br><span class="line">                &#125;)</span><br><span class="line"> &#125;</span><br><span class="line"> Name (SBFI, ResourceTemplate ()</span><br><span class="line"> &#123;</span><br><span class="line">                    Interrupt (ResourceConsumer, Level, ActiveLow, </span><br><span class="line"><span class="built_in">Exclusive,</span> ,, )</span><br><span class="line">                     &#123;   </span><br><span class="line"><span class="built_in">                                        0x0000006D,</span>    </span><br><span class="line">                     &#125;</span><br></pre></td></tr></table></figure>
+
 <p>根据上面要求，就应该修改为：</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Name (SBFB, ResourceTemplate ()</span><br><span class="line">&#123;</span><br><span class="line">					I2cSerialBusV2 (<span class="number">0x0000</span>, ControllerInitiated, <span class="number">0x00061A80</span>,</span><br><span class="line">						AddressingMode7Bit, <span class="string">"<span class="subst">\\</span>_SB.PCI0.I2C0"</span>,</span><br><span class="line">					   <span class="number">0x00</span>, ResourceConsumer, _Y2A, Exclusive,</span><br><span class="line">					   )</span><br><span class="line">		&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="SBFG-Gpioint-修改"><a href="#SBFG-Gpioint-修改" class="headerlink" title="SBFG (Gpioint) 修改"></a>SBFG (Gpioint) 修改</h3><p>首先尝试在你触摸设备所对应的 DSDT 代码里搜索类似如下的这段代码：</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Name (<span class="name">SBFG</span>, ResourceTemplate ()    </span><br><span class="line">&#123;        </span><br><span class="line">         GpioInt (<span class="name">Level</span>, ActiveLow, ExclusiveAndWake,PullDefault,<span class="number">0</span>x0000,           </span><br><span class="line">                  <span class="string">"\\_SB.PCI0.GPI0"</span>, <span class="number">0</span>x00, ResourceConsumer, ,            </span><br><span class="line">                   )            </span><br><span class="line">                   &#123;   // Pin list                </span><br><span class="line">                        <span class="number">0</span>x0000            </span><br><span class="line">                   &#125;    </span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
 <p>比如我的是这样：</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Name (<span class="name">SBFG</span>, ResourceTemplate ()    </span><br><span class="line">&#123;        </span><br><span class="line">		GpioInt (<span class="name">Level</span>, ActiveLow, ExclusiveAndWake,PullDefault,<span class="number">0</span>x0000,           </span><br><span class="line">				<span class="string">"\\_SB.PCI0.GPI0"</span>, <span class="number">0</span>x00, ResourceConsumer, ,            </span><br><span class="line">				)            </span><br><span class="line">				&#123;   // Pin list                </span><br><span class="line">					<span class="number">0</span>x0038            </span><br><span class="line">				&#125;    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>如果并没有这段代码，那么你需要在触摸设备的根目录下补上这段代码，像这样：</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Scope (_SB.PCI0.I2C0)</span><br><span class="line">       &#123;</span><br><span class="line">           Device (TPAD)</span><br><span class="line">           &#123;</span><br><span class="line">               Name (SBFG, ResourceTemplate ()</span><br><span class="line">               &#123;</span><br><span class="line">                    GpioInt (Level, ActiveLow, Exclusive, PullUp, <span class="number">0x0000</span>,</span><br><span class="line">                            <span class="string">"<span class="subst">\\</span>_SB.PCI0.GPI0"</span>, <span class="number">0x00</span>, ResourceConsumer, ,</span><br><span class="line">                            )</span><br><span class="line">                            &#123;   <span class="comment">// Pin list</span></span><br><span class="line">                                <span class="number">0x0038</span></span><br><span class="line">                            &#125;</span><br><span class="line">               &#125;)</span><br><span class="line">               </span><br><span class="line">               ......</span><br></pre></td></tr></table></figure>
+
 <p>如果有这段代码但蓝色字样的数值为 0，那么你就需要看看自己 _CRS 方法里是不是只有这一行语句：</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Return (<span class="name">ConcatenateResTemplate</span> (<span class="name">SBFB</span>, SBFG))</span><br></pre></td></tr></table></figure>
+
 <p> 如果只有这行代码，那么你就可以转入后续的完善热补丁步骤；否则就需要给其添加 GPIO Pin 数值。</p>
 <p> 如果你是 SunrisePoint 架构 6 代 至 8 代 Kaby Lake-R 处理器（比如：8250U, 8550U）查找 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/skylake/include/soc/gpio_defs.h#L43" target="_blank" rel="noopener"><strong>表一</strong></a>，寻找你之前的 APIC Pin 值，得到一个 IRQ 值；然后再前往 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/skylake/include/soc/gpio_soc_defs.h#L37" target="_blank" rel="noopener"><strong>表二</strong> </a>根据 IRQ 找到一个对应的GPIO Pin值（10进制），把它转换为16进制值。如果这个十六进制数介于 5c 到 77 之间，那么这个数就是你需要的 GPIO Pin值。如果这个数不在这俩数之间，那你就会发现：你的 16 进制 APIC pin 值在表一对应了两个或以上的 IRQ 值。这就需要你分别对多个值进行测试，看哪个才是正确的。有的时候，也可能超出区间但是却只有一个值，那么尝试这个值就好。</p>
-<p> 如果你是 CannonPoint(Lake) 架构 8/9 代标压 Coffee Lake(-R)，查找 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_defs_cnp_h.h#L42" target="_blank" rel="noopener"><strong>表一</strong></a>，寻找你之前的 APIC Pin 值，得到一个 IRQ 值；然后再前往 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_soc_defs_cnp_h.h#L40" target="_blank" rel="noopener"><strong>表二</strong> </a>根据 IRQ 找到一个对应的 GPIO Pin 值（10进制），接着转到 <a href="https://github.com/coolstar/VoodooGPIO/blob/master/VoodooGPIO/CannonLake-LP/VoodooGPIOCannonLakeLP.hpp#L366" target="_blank" rel="noopener"><strong>GPIO Pin 转换公式</strong></a>，你会看到 “CHIPSET_GPP(数字, 基数, 终止, gpio_基数), /<em> GPP_X </em>/“ 用之前 IRQ 中 “GPP_” 后面的 英文字母（A, B, C…）找到你对应的转换值，用你的 10 进制 GPIO Pin 值减去“基数”然后加上“gpio_基数”，把最后得到数字转换为 16 进制就是你最后的 GPIO Pin</p>
-<p> 如果你是 CannonPoint(Lake) 架构 8 代低压刷新 Whiskylake：以 65U 结尾的处理器（比如：8265U, 8565U），查找 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_defs.h#L42" target="_blank" rel="noopener"><strong>表一</strong></a>，寻找你之前的 APIC Pin 值，得到一个 IRQ 值；然后再前往 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_soc_defs.h#L45" target="_blank" rel="noopener"><strong>表二</strong> </a>根据 IRQ 找到一个对应的GPIO Pin值（10进制），接着转到 <a href="https://github.com/coolstar/VoodooGPIO/blob/master/VoodooGPIO/CannonLake-H/VoodooGPIOCannonLakeH.hpp#L414" target="_blank" rel="noopener"><strong>GPIO Pin 转换公式</strong></a>，你会看到 “CHIPSET_GPP(数字, 基数, 终止, gpio_基数), /<em> GPP_X </em>/“ 用之前 IRQ 中 “GPP_” 后面的 英文字母（A, B, C…）找到你对应的转换值，用你的 10 进制 GPIO Pin 值减去“基数”然后加上“gpio_基数”，把最后得到数字转换为 16 进制就是你最后的 GPIO Pin</p>
+<p> 如果你是 CannonPoint(Lake) 架构 8/9 代标压 Coffee Lake(-R)，查找 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_defs_cnp_h.h#L42" target="_blank" rel="noopener"><strong>表一</strong></a>，寻找你之前的 APIC Pin 值，得到一个 IRQ 值；然后再前往 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_soc_defs_cnp_h.h#L40" target="_blank" rel="noopener"><strong>表二</strong> </a>根据 IRQ 找到一个对应的 GPIO Pin 值（10进制），接着转到 <a href="https://github.com/coolstar/VoodooGPIO/blob/master/VoodooGPIO/CannonLake-LP/VoodooGPIOCannonLakeLP.hpp#L366" target="_blank" rel="noopener"><strong>GPIO Pin 转换公式</strong></a>，你会看到 “CHIPSET_GPP(数字, 基数, 终止, gpio_基数), /* GPP_X */“ 用之前 IRQ 中 “GPP_” 后面的 英文字母（A, B, C…）找到你对应的转换值，用你的 10 进制 GPIO Pin 值减去“基数”然后加上“gpio_基数”，把最后得到数字转换为 16 进制就是你最后的 GPIO Pin</p>
+<p> 如果你是 CannonPoint(Lake) 架构 8 代低压刷新 Whiskylake：以 65U 结尾的处理器（比如：8265U, 8565U），查找 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_defs.h#L42" target="_blank" rel="noopener"><strong>表一</strong></a>，寻找你之前的 APIC Pin 值，得到一个 IRQ 值；然后再前往 <a href="https://github.com/coreboot/coreboot/blob/master/src/soc/intel/cannonlake/include/soc/gpio_soc_defs.h#L45" target="_blank" rel="noopener"><strong>表二</strong> </a>根据 IRQ 找到一个对应的GPIO Pin值（10进制），接着转到 <a href="https://github.com/coolstar/VoodooGPIO/blob/master/VoodooGPIO/CannonLake-H/VoodooGPIOCannonLakeH.hpp#L414" target="_blank" rel="noopener"><strong>GPIO Pin 转换公式</strong></a>，你会看到 “CHIPSET_GPP(数字, 基数, 终止, gpio_基数), /* GPP_X */“ 用之前 IRQ 中 “GPP_” 后面的 英文字母（A, B, C…）找到你对应的转换值，用你的 10 进制 GPIO Pin 值减去“基数”然后加上“gpio_基数”，把最后得到数字转换为 16 进制就是你最后的 GPIO Pin</p>
 <p> 不过在某些极端状况下，你找到的值都不起作用的话。那么此时，你只能去尝试些比较常见的数值了，如<strong>0x17、0x1b、0x34</strong>和<strong>0x55</strong>。（仅限 SunrisePoint）</p>
 <p> 总之，在完成之后，你需要把得到的 16 进制 GPIO pin 数值填入 SBFG 语句块里，像这样：</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Name (SBFG, ResourceTemplate ()    </span><br><span class="line">&#123;        </span><br><span class="line">     GpioInt (Level, ActiveLow, ExclusiveAndWake, PullDefault, <span class="number">0x0000</span>,           </span><br><span class="line">     			<span class="string">"<span class="subst">\\</span>_SB.PCI0.GPI0"</span>, <span class="number">0x00</span>, ResourceConsumer, ,            </span><br><span class="line">      		)            </span><br><span class="line">      		&#123;   <span class="comment">// Pin list                </span></span><br><span class="line">          		<span class="number">0x17</span>     <span class="comment">// 这一行就是你需要填写的位置！            </span></span><br><span class="line">      		&#125;   </span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
 <h3 id="CRS-返回值的修改"><a href="#CRS-返回值的修改" class="headerlink" title="CRS 返回值的修改"></a>CRS 返回值的修改</h3><p>## </p>
 <p> 到这里，去 _CRS 方法下，确保所有返回语句只有这一条存在，像这样:</p>
 <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">Method</span> <span class="params">(_CRS, 0, Serialized)</span>  // _<span class="title">CRS</span>:</span> Current Resource Settings</span><br><span class="line">                 <span class="comment">&#123;</span></span><br><span class="line"><span class="comment">                     Store (Zero, Local0)</span></span><br><span class="line"><span class="comment">                     Store (Zero, Local1)</span></span><br><span class="line"><span class="comment">                     Store (DerefOf (Index (DerefOf (Index (TPID, Local0)), Zero)), Local1)</span></span><br><span class="line"><span class="comment">                     While (LAnd (LNotEqual (Local1, 0xFE), LNotEqual (Local1, TPDF)))</span></span><br><span class="line"><span class="comment">                     &#123;</span></span><br><span class="line"><span class="comment">                         Increment (Local0)</span></span><br><span class="line"><span class="comment">                         If (LGreaterEqual (Local0, SizeOf (TPID)))</span></span><br><span class="line"><span class="comment">                         &#123;</span></span><br><span class="line"><span class="comment">                             Break</span></span><br><span class="line"><span class="comment">                         &#125;</span></span><br><span class="line"></span><br><span class="line">					 Store (DerefOf (<span class="keyword">Index</span> (DerefOf (<span class="keyword">Index</span> (TPID, Local0)), Zero)), Local1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">					Store (DerefOf (<span class="keyword">Index</span> (DerefOf (<span class="keyword">Index</span> (TPID, Local0)), One)), ADR0)</span><br><span class="line">					Store (DerefOf (<span class="keyword">Index</span> (DerefOf (<span class="keyword">Index</span> (TPID, Local0)), <span class="number">0</span>x02)), HID2)</span><br><span class="line">					Return (ConcatenateResTemplate (SBFB, SBFG))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="轮询模式"><a href="#轮询模式" class="headerlink" title="轮询模式"></a>轮询模式</h2><p>轮询模式所做的修改相对较少，我们只需要保证以下三点即可：</p>
 <p><strong>1、确保没有应用GPIO Controller 补丁</strong></p>
 <p><strong>2、确保没有做GPIO 的手动修改</strong></p>
@@ -386,28 +396,30 @@ classes that you can use:
 <p>目前六代的 Skylake 的 I2C Controller 热补丁已经制作完成，也可以进行热补丁移植工作了。</p>
 <h3 id="添加-GPIO-与-XOSI-热补丁"><a href="#添加-GPIO-与-XOSI-热补丁" class="headerlink" title="添加 GPIO 与 XOSI 热补丁"></a>添加 GPIO 与 XOSI 热补丁</h3><p>下载 <strong>SSDT-XOSI.aml</strong> 与 <strong>SSDT-GPIO.aml</strong>（如果你使用轮询模式，那么不要下载这个），解压并放在 ACPI/Patched 目录下，然后在四叶草编辑器的 ACPI 选项卡下添加如下两个改名补丁：</p>
 <figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">change <span class="variable">_OSI</span> <span class="keyword">to</span> XOSI</span><br><span class="line"></span><br><span class="line"><span class="built_in">Find</span>：<span class="number">5</span>F4F5349    Replace：<span class="number">584</span>F5349</span><br><span class="line"></span><br><span class="line">change <span class="variable">_STA</span> <span class="keyword">to</span> XSTA <span class="built_in">in</span> GPI0 </span><br><span class="line"></span><br><span class="line"><span class="built_in">Find</span>: <span class="number">5</span>F535441    Replace: <span class="number">58535441</span>   TgtBridge:<span class="number">47504930</span></span><br></pre></td></tr></table></figure>
+
 <p>如果你是六代Skylake的，那么还需要添加 SKL I2C Controller热补丁(详情见后文下载)</p>
 <h3 id="代码复制"><a href="#代码复制" class="headerlink" title="代码复制"></a>代码复制</h3><p>接下来，将你修改好的触摸设备的 ACPI 代码复制到<strong>SSDT-触摸样本.dsl</strong>的 DefinitionBlock 大括号内里，像这样：</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/复制之后.png" alt="复制之后"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/%E5%A4%8D%E5%88%B6%E4%B9%8B%E5%90%8E.png" alt="复制之后"></p>
 <p>复制之后，我们还要修正名称，来确保这个 SSDT 是正确的。修正的地方有三处：</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/修改名称.png" alt="修改名称"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/%E4%BF%AE%E6%94%B9%E5%90%8D%E7%A7%B0.png" alt="修改名称"></p>
 <p>第一处第二处都修正为你的 BIOS 名称，而第三处则还要带上 BIOS 名称的全路径（以我的为例）：</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/修改后.png" alt="修改后"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/%E4%BF%AE%E6%94%B9%E5%90%8E.png" alt="修改后"></p>
 <p><strong>补充：经过本人实测，第一处的修不修改其实没有太大影响，不修改也是可以的。</strong></p>
 <h3 id="除错"><a href="#除错" class="headerlink" title="除错"></a><strong>除错</strong></h3><p>接下来，我们就进入了给热补丁排错的过程。</p>
 <p>点击 编译 (Compile)，你会发现此时热补丁会报一堆错误。这里面的错误，大多是因为缺少东西所致。你可能需要因此添加很多东西，比如引用Device、Method，还有一些数据等等。</p>
 <p>在我提供的样本里，已经提供了两个示例展示如何引用。在这，我还是补几张图说明下引用的过程。比如，以我的报错为例。你可以看到，在其中有一条提示缺少了 TPDD：</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/报错.jpg" alt="报错"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/%E6%8A%A5%E9%94%99.jpg" alt="报错"></p>
 <p>所以对应地，我们去 DSDT 搜索，直到最后定位到相应的数值（或者方法、设备以及它们的引用，最后定位只能是这几种）：</p>
 <p><img src="/2019/01/06/VoodooI2C DSDT Edit/tpdd.png" alt="tpdd"></p>
 <p>第一处表示了它的构造区域，第二处则表示这个名称的值。接下来，我们复制这个数据及其对应的构造区域到SSDT中：</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/tpdd修改.png" alt="tpdd修改"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/tpdd%E4%BF%AE%E6%94%B9.png" alt="tpdd修改"></p>
 <p>再点击 Compile，与 TPDD 相关的报错应该都消失了。</p>
 <p>除了这个之外，有时候我们缺失的是设备或者方法，我们只需要从 MaciASL 下方确认它的全路径，然后使用这条语句引用即可：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">External (xxxx<span class="selector-class">.xxxx</span><span class="selector-class">.xxxx</span>, DeviceObj) <span class="comment">//如果是方法，就使用Method0bj；如果是区域则使用FieldUnitObj</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>注意：这条语句要放在 DefinitionBlock 块内的最前面！</strong></p>
 <p>总之，最后你的 SSDT 要同 DSDT 一样没有 ERROR，这才算完成：</p>
-<p><img src="/2019/01/06/VoodooI2C DSDT Edit/通过.png" alt="通过"></p>
+<p><img src="/2019/01/06/VoodooI2C DSDT Edit/%E9%80%9A%E8%BF%87.png" alt="通过"></p>
 <p>热补丁教程中提及的有关热补丁我已经分享出来，<a href="https://pan.baidu.com/s/11A1wDi73gF0XVRmxw8sbwQ" target="_blank" rel="noopener">点击这里下载</a>。</p>
 <hr>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p> 到这里，我们的修改就完成了，接下来就是安装。将你修改好的 DSDT（热补丁）放入 ACPI/patched，再放入驱动。在这个时候，我们需要注意，系统里 AppleIntelLpssI2C.kext 和 AppleIntelLpssI2CController.kext 这两个驱动有可能会导致 VoodooI2C 驱动不工作，因此，有必要移除这两个驱动。你可以选择直接删除它们然后重建缓存，也可以选择用四叶草 Config进行屏蔽。屏蔽的配置文件详见<a href="https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/config_patches.plist" target="_blank" rel="noopener">这里</a>。</p>
@@ -420,7 +432,9 @@ classes that you can use:
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>VoodooI2C 使用 CSG 以及白果手势引擎来支持各种多点触控。其中，2.1.1后的版本，换用了白果手势引擎 (Magic Trackpad 2 模拟器)。这类手势可以通过系统设置里面触摸板的相关选项来设置。</p>
 <p>下面就是Voodooi2c所支持的所有手势列表：</p>
 <h5 id="CSG手势："><a href="#CSG手势：" class="headerlink" title="CSG手势："></a>CSG手势：</h5><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">·单击</span><br><span class="line">·两指滚动</span><br><span class="line">·三指配合alt的上下左右滚动</span><br><span class="line">·四指滑动</span><br><span class="line">·拖动（在“辅助功能”里的“鼠标和触摸板”中找到相关设置选项）</span><br><span class="line">·向下 - Command + <span class="built_in">W</span></span><br><span class="line">·向左- Command + <span class="built_in">Q</span></span><br><span class="line">·向上 - 显示桌面</span><br><span class="line">·向下 - Command + F11</span><br></pre></td></tr></table></figure>
+
 <h5 id="白果手势："><a href="#白果手势：" class="headerlink" title="白果手势："></a>白果手势：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">·双指通知中心</span><br><span class="line">·双指缩放</span><br><span class="line">·双指返回（Safari浏览器）</span><br></pre></td></tr></table></figure>
+
 <p>另外，2.1.2以上的版本，加入了<strong>“鼠标插入时忽略内建触摸板”</strong>的功能配置以及<strong>“打字防误碰支持”</strong>（需要配合新版<strong>VoodooPS2Controller</strong>）</p>
 <p>教程已经大致更新完毕，后续仍会有补充。</p>
 <p>教程中少部分内容由 <a href="https://github.com/williambj1" target="_blank" rel="noopener">Bat.bat</a> 修补</p>
