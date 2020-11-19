@@ -7,7 +7,7 @@
     
 
     <title>
-      VoodooI2C编译教程 | 望海之洲 
+      GalioEthernet9601:一个全新的DM9601转接器驱动 | 望海之洲 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,29 +16,24 @@
     
     
 
-    <meta name="description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
-<meta name="keywords" content="驱动,编译,I2C">
+    <meta name="description" content="前言各位好，很久没有更新些干货了，真是抱歉。这一年自己真的很忙，忙学习，忙着准备考研，事情繁杂，所以直到现在才抽出空来搞搞这些。 将近一年的时间里，除了学习以外的生活，我基本醉心于IOKit的驱动开发。在我心里，能写出来IOKit的驱动，是检验自己能力的标志之一。前两天我的这个项目总算有了些眉目，目前也基本到了能识别的状态。所以我选择把它拿出来，给各位分享下。  没错，你没看错。我做了这个项目的初">
+<meta name="keywords" content="驱动,IOKit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VoodooI2C编译教程 | 望海之洲">
-<meta property="og:url" content="http://yoursite.com/2019/01/24/VoodooI2C Build/index.html">
+<meta property="og:title" content="GalioEthernet9601:一个全新的DM9601转接器驱动 | 望海之洲">
+<meta property="og:url" content="http://yoursite.com/2020/11/20/GalioEthernet9601/index.html">
 <meta property="og:site_name" content="望海之洲">
-<meta property="og:description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
+<meta property="og:description" content="前言各位好，很久没有更新些干货了，真是抱歉。这一年自己真的很忙，忙学习，忙着准备考研，事情繁杂，所以直到现在才抽出空来搞搞这些。 将近一年的时间里，除了学习以外的生活，我基本醉心于IOKit的驱动开发。在我心里，能写出来IOKit的驱动，是检验自己能力的标志之一。前两天我的这个项目总算有了些眉目，目前也基本到了能识别的状态。所以我选择把它拿出来，给各位分享下。  没错，你没看错。我做了这个项目的初">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%BA%90.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%BA%90%E7%A0%81.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E4%B8%8B%E8%BD%BD.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%89%93%E5%BC%80.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E5%88%A0%E9%99%A4.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/building.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E6%88%90%E5%8A%9F.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E5%B1%95%E5%BC%80.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E9%A9%B1%E5%8A%A8.png">
-<meta property="og:updated_time" content="2019-12-24T08:35:12.520Z">
+<meta property="og:image" content="http://yoursite.com/2020/11/20/GalioEthernet9601/Galio.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/20/GalioEthernet9601/test1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/20/GalioEthernet9601/test2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/20/GalioEthernet9601/test3.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/20/GalioEthernet9601/test4.jpg">
+<meta property="og:updated_time" content="2020-11-19T22:06:38.830Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VoodooI2C编译教程 | 望海之洲">
-<meta name="twitter:description" content="声明本文由本人原创，教程已首发黑苹果乐园下，点击这里查看。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！ 前言对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。 当然对于大多数小白而">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/24/VoodooI2C%20Build/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7.png">
+<meta name="twitter:title" content="GalioEthernet9601:一个全新的DM9601转接器驱动 | 望海之洲">
+<meta name="twitter:description" content="前言各位好，很久没有更新些干货了，真是抱歉。这一年自己真的很忙，忙学习，忙着准备考研，事情繁杂，所以直到现在才抽出空来搞搞这些。 将近一年的时间里，除了学习以外的生活，我基本醉心于IOKit的驱动开发。在我心里，能写出来IOKit的驱动，是检验自己能力的标志之一。前两天我的这个项目总算有了些眉目，目前也基本到了能识别的状态。所以我选择把它拿出来，给各位分享下。  没错，你没看错。我做了这个项目的初">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/20/GalioEthernet9601/Galio.jpg">
     
     
       <link rel="alternate" href="/atom.xml" title="望海之洲" type="application/atom+xml">
@@ -213,22 +208,22 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">VoodooI2C编译教程</h1>
+    <h1 class="post-title">GalioEthernet9601:一个全新的DM9601转接器驱动</h1>
 
     
     <div class="post-meta">
-      <time datetime="2019-01-24" class="post-meta__date date">2019-01-24</time> 
+      <time datetime="2020-11-20" class="post-meta__date date">2020-11-20</time> 
       <span class="post-meta__tags tags">
           
             <font class="categories">
             &#8226; 分类:
-            <a class="categories-link" href="/categories/教程/">教程</a>
+            <a class="categories-link" href="/categories/分享/">分享</a>
             </font>
           
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/I2C/">I2C</a>, <a class="tags-link" href="/tags/编译/">编译</a>, <a class="tags-link" href="/tags/驱动/">驱动</a>
+              <a class="tags-link" href="/tags/IOKit/">IOKit</a>, <a class="tags-link" href="/tags/驱动/">驱动</a>
             </font>
           
       </span>
@@ -236,7 +231,7 @@ classes that you can use:
       <span class="post-meta__wordcount wordcount">
       <font class="wordcount">
       &#8227; 文章字数:
-      841
+      1.4k
       </font> 
       </span>
     
@@ -246,37 +241,44 @@ classes that you can use:
 
 
   <section id="post-content" class="article-content post">
-    <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本文由本人原创，教程已首发黑苹果乐园下，<a href="https://imac.hk/build-voodooi2c-kext.html" target="_blank" rel="noopener">点击这里查看</a>。未经本人与黑苹果乐园官方允许，严禁转载抄袭！！！！</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于目前绝大多数新本来说，使用VoodooI2C驱动触摸板是必不可少的。但是很多同学会很头疼Release驱动的各种问题（比如2.1.4版本的内核泄漏问题……），于是这个时候，编译最新版本驱动就成了几乎唯一的选择。编译最新的驱动可以获得最新的问题修改并获得新功能。</p>
-<p>当然对于大多数小白而言，编译驱动似乎遥不可及，甚至是天方夜谭。不过我想说的是，不要自己吓自己。接下来，我就来告诉各位小白：编译并用上最新的VoodooI2C，其实没那么难……</p>
-<h1 id="安装相关环境"><a href="#安装相关环境" class="headerlink" title="安装相关环境"></a>安装相关环境</h1><p>编译任何Mac驱动，我们都离不开Xcode工具，它是我们编译驱动的好帮手。下载Xcode十分简单，只需要在Mac App Store搜索并下载即可。当然了，如果你的黑果尚不能访问App Store，你也可以点击<a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">这里</a>下载。</p>
-<p>注意在这里下载前，要先注册一个Apple ID。</p>
-<h1 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h1><p>VoodooI2C项目由本体以及依赖和目标驱动三块组成。为了管理方便，作者亚历山大将其使用Submodule分割在了不同的仓库里。当我们编译的时候，就需要保证它们都在正确的位置才可以正常编译。</p>
-<p>由于操作命令行终端对于大多数小白是困难的，所以我这里不介绍如何使用git同步源码了，这里只介绍如何去github页面下载。</p>
-<p>以VoodooI2C的下载为例：</p>
-<p>1、 进入<a href="https://github.com/alexandred" target="_blank" rel="noopener">亚历山大的github源</a>(不得不说我亚历山大长得蛮帅的~)</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7.png" alt="img"></p>
-<p>2、点击repositories </p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E6%BA%90.png" alt="img"></p>
-<p>2、 点击VoodooI2C进入，就可以看到源码以及说明</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E6%BA%90%E7%A0%81.png" alt="img"></p>
-<p>3、 按照图示，依次点击下载</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E4%B8%8B%E8%BD%BD.png" alt="img"></p>
-<p>等待下载完成后，我们就可以得到一份VoodooI2C源码了。</p>
-<p>同样地，依照此法，我们下载VoodooGPIO以及你的目标驱动源码。需要注意，下载得到的文件夹，要去掉-master后缀，对应放入VoodooI2C的文件夹下（VoodooGPIO放入dependencies，目标驱动放入VoodooI2C Satellite）。弹出替换提示不用管，直接替换就好。这样，我们待编译的源码就准备完毕了。</p>
-<h1 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h1><p>接下来，我们用Xcode打开源码文件夹根目录的VoodooI2C.xcworkspace文件。此时会弹出一个英文对话框，提示你此项目为网上下载，是否打开。点击open打开。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E6%89%93%E5%BC%80.png" alt="img"></p>
-<p>然后，我们需要删除两个关键的条目来保证编译成功。点击左侧VoodooI2C蓝色项目，然后在右侧点击Build Phases。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E5%88%A0%E9%99%A4.png" alt="img"></p>
-<p>图中画圈的两个条目我们不需要，删除它。然后我们点击左上角的编译按钮（一个类似播放的图标），驱动源码就会开始编译。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/building.jpg" alt="img"></p>
-<p>当显示build succeed  时，我们编译成功</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E6%88%90%E5%8A%9F.jpg" alt="img"></p>
-<p>接下来，展开左侧窗格的product文件夹</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E5%B1%95%E5%BC%80.png" alt="img"></p>
-<p>右击VoodooI2C.kext，选择show in finder，就可以看见编译好的驱动。</p>
-<p><img src="/2019/01/24/VoodooI2C Build/%E9%A9%B1%E5%8A%A8.png" alt="img"></p>
-<p>到这里，我们的编译就算完成了，尽情享用你的新驱动吧~</p>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位好，很久没有更新些干货了，真是抱歉。这一年自己真的很忙，忙学习，忙着准备考研，事情繁杂，所以直到现在才抽出空来搞搞这些。</p>
+<p>将近一年的时间里，除了学习以外的生活，我基本醉心于IOKit的驱动开发。在我心里，能写出来IOKit的驱动，是检验自己能力的标志之一。前两天我的这个项目总算有了些眉目，目前也基本到了能识别的状态。所以我选择把它拿出来，给各位分享下。</p>
+<p><img src="/2020/11/20/GalioEthernet9601/Galio.jpg" alt="Galio.jpg"></p>
+<p>没错，你没看错。我做了这个项目的初衷，真的是致敬我最爱的英雄联盟里最喜欢的英雄之一——加里奥的。（嗨，大家好~）</p>
+<p>皮这一下我很开心，下面我们说点正经的。 GalioEthernet9601是一个基于Davicom公司的DM9601 USB转接器开发的MacOS开源驱动  (详细说明请见 <a href="https://github.com/samuelv0304/USBCDCEthernet" target="_blank" rel="noopener">samuelv0304的项目</a>))。实际上，你可以把它看作是对<strong>USBCDCEthernet</strong>的一个重写和升级的项目。</p>
+<p> USBCDCEthernet是一个十分完善的驱动,自从我上了大一以后，这个网卡我就在用过，配合USBCDCEthernet，在黑果下工作十分完美。不过美中不足，这个驱动很久没人维护了，将近七年的时间，苹果的底层代码早已大变样。当这个驱动来到大苏尔时代时，它的代码就不那么好运行在大苏尔上了；除此之外，由于过于老旧，你没法在新版系统上编译USBCDCEthernet项目的源码，因为USBCDCEthernet项目源码是基于IOUSBDevice作为提供者类（Provider）来开发的。然鹅，早在12 Sierra时代，苹果就已经废弃了IOUSBDevice相关的头文件，让开发者迁移到IOUSBHostDevice上。所以只要你的MacOS版本大于12.0，这个驱动基本你就没什么办法编译了（除非你强行用旧版SDK或者使用MacKernelSDK。可即便这样，这个驱动的编译依旧很费劲）。</p>
+<p>更加糟糕的是，经过我对这个驱动的源码的检查，发现里面有很多代码都是苹果已经不推荐使用的代码（比如这个驱动的定时器事件代码，没有使用苹果驱动目前通常使用的OSMemberFunctionCast宏来转换）。另外，这里面使用了10.9时代由IOUSBFamily示例改写的CDC源码，里面由于IOLog函数的版本问题，在高版本MacOS上已经无法输出日志，这对于驱动故障的排除很是不便。</p>
+<p>基于以上种种理由，最后我下定了决心：重写这个驱动。</p>
+<p>重写的路并非一帆风顺。IOKit的学习资料并不算很多，我查阅了不少东西，也包括问了不少人（包括PMHeart老阿姨、Kishor老哥还有Intel无线网卡驱动的开发者Zxystd等人在内），经过差不多大半年的折腾，现在终于可以拿出来一个相对比较完善的成品出来给大家，也当做自己的一个处女作品。</p>
+<h2 id="它能做什么"><a href="#它能做什么" class="headerlink" title="它能做什么?"></a>它能做什么?</h2><p>就像我说的一样，这是一个由USBCDCEthernet <strong>重写的</strong> 项目，因此理论上 USBCDCEthernet能做到什么，它也能做到什么。目前为止，我已经移植了原USBCDCEthernet将近五分之四的源码，源码的移植工作已经趋近尾声。我还没有计划加入一些新的东西， 也许有一天，当它完全移植了USBCDCEthernet的所有原有代码后，我就可以着手加些新东西了。</p>
+<p>截止本文发稿时，我已经实现了在MacOS上识别此设备（显示为“自分配的IP“，实际还不能上网，因为上网通信相关的函数尚未移植完成），并且插上网线也能亮灯。目前我的计划是在闲暇时间内，将剩余部分的源码移植完成，并着手排除一些驱动错误，优化驱动代码，使它的运行效率更高。</p>
+<p>一群人的力量总是大过一个人。如果你对这个项目有一些好主意，只需要在issue页面写下来就好。如果你有好的代码要贡献，欢迎随时送达PR给我。</p>
+<p>目前据我了解的情况是，市面上绝大多数USB网线转接器，使用的都是RD9700这个型号，也就是DM9601芯片。因此，应该很容易测试开发这个驱动。</p>
+<h2 id="我怎样安装它"><a href="#我怎样安装它" class="headerlink" title="我怎样安装它?"></a>我怎样安装它?</h2><ul>
+<li><p>从这里下载并用XCode编译它。</p>
+</li>
+<li><p>使用sudo把驱动拷贝到/System/Library/Extensions然后重建缓存(或者通过OC/Clover注入，仅限黑苹果)。</p>
+</li>
+</ul>
+<p>我在13.6上已经测试过，它很可能支持12.0以上版本，但我目前尚未测试。</p>
+<p>顺带放几张已经测试的照片：</p>
+<p>首先是驱动加载时的情况：</p>
+<p><img src="/2020/11/20/GalioEthernet9601/test1.jpg" alt="test1"></p>
+<p><img src="/2020/11/20/GalioEthernet9601/test2.jpg" alt="test2"></p>
+<p><img src="/2020/11/20/GalioEthernet9601/test3.jpg" alt="test3"></p>
+<p>然后是驱动卸载的情况：</p>
+<p><img src="/2020/11/20/GalioEthernet9601/test4.jpg" alt="test4"></p>
+<p>目前来说，这个驱动已经可以正常卸载和加载了，且能够被系统识别出来，剩下的就是网络通信功能的添加（实际上在这个图里我已经移植了一部分的网络通信功能）。</p>
+<h2 id="驱动下载以及开发文档"><a href="#驱动下载以及开发文档" class="headerlink" title="驱动下载以及开发文档"></a>驱动下载以及开发文档</h2><ul>
+<li>有关驱动下载的方式，请访问 <a href="https://github.com/startpenghubingzhou/GalioEthernet9601" target="_blank" rel="noopener">GitHub</a> 获取下载。</li>
+<li>有关DM9601的开发信息，可以从 <a href="https://github.com/startpenghubingzhou/GalioEthernet9601/blob/main/Documentation/DM9601-DS-P01-930914.pdf" target="_blank" rel="noopener">这里</a> 获取。</li>
+</ul>
+<h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><ul>
+<li>@<a href="https://github.com/haiku" target="_blank" rel="noopener">haiku</a> 的 <a href="https://github.com/haiku/haiku" target="_blank" rel="noopener">haiku project</a></li>
+<li>@<a href="https://github.com/samuelv0304" target="_blank" rel="noopener">samuelv0304</a> 的 <a href="https://github.com/samuelv0304/USBCDCEthernet" target="_blank" rel="noopener">USBCDCEthernet</a><strong>(致以最崇高的敬意！)</strong></li>
+<li>@<a href="https://github.com/zxystd" target="_blank" rel="noopener">zxystd </a> 对此项目编写的帮助</li>
+</ul>
+<h2 id="许可证"><a href="#许可证" class="headerlink" title="许可证"></a>许可证</h2><p>这个项目的代码遵循 <strong>苹果公共源代码许可证（ASPL）</strong>。点击License可以查询更多相关信息。</p>
 
   </section>
 
