@@ -16,13 +16,13 @@
     
     
 
-    <meta name="description" content="本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就能用了的小小小白 VoodoI2C 不同于任何一个其他的黑苹果驱动，直接将驱动放入 Clover 或者 L/">
+    <meta name="description" content="此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从VoodooI2C触摸板驱动教程获取原始内容！！！！本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就">
 <meta name="keywords" content="DSDT,I2C,触摸板">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VoodooI2C触摸设备驱动教程补充 | 望海之洲">
 <meta property="og:url" content="http://yoursite.com/2019/07/24/VoodooI2C DSDT Edit FAQ/index.html">
 <meta property="og:site_name" content="望海之洲">
-<meta property="og:description" content="本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就能用了的小小小白 VoodoI2C 不同于任何一个其他的黑苹果驱动，直接将驱动放入 Clover 或者 L/">
+<meta property="og:description" content="此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从VoodooI2C触摸板驱动教程获取原始内容！！！！本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Circumstances.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/ETPD.png">
@@ -48,10 +48,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/L-E.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Success.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Success2.png">
-<meta property="og:updated_time" content="2019-07-24T08:02:51.460Z">
+<meta property="og:updated_time" content="2020-11-23T03:26:05.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VoodooI2C触摸设备驱动教程补充 | 望海之洲">
-<meta name="twitter:description" content="本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就能用了的小小小白 VoodoI2C 不同于任何一个其他的黑苹果驱动，直接将驱动放入 Clover 或者 L/">
+<meta name="twitter:description" content="此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从VoodooI2C触摸板驱动教程获取原始内容！！！！本文来自于触摸群的bat，是对本教程VoodooI2C触摸板驱动教程的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。 目录 FAQ 触摸板专有词汇集合 触摸板必备软件集合 DSDT 触摸板部分详解 排错 鸣谢  致那些无脑放完驱动就">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/williambj1/VoodooI2C-PreRelease/master/IMG/Circumstances.png">
     
     
@@ -260,7 +260,7 @@ classes that you can use:
 
 
   <section id="post-content" class="article-content post">
-    <p>本文来自于触摸群的bat，是对本教程<a href="https://www.penghubingzhou.cn/2019/01/06/VoodooI2C%20DSDT%20Edit/" target="_blank" rel="noopener">VoodooI2C触摸板驱动教程</a>的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。</p>
+    <h1 id="此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从VoodooI2C触摸板驱动教程获取原始内容！！！！"><a href="#此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从VoodooI2C触摸板驱动教程获取原始内容！！！！" class="headerlink" title="此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从VoodooI2C触摸板驱动教程获取原始内容！！！！"></a>此文章因图片无法补充，且内容已过时，经讨论予以废弃，请从<a href="https://www.penghubingzhou.cn/2019/01/06/VoodooI2C%20DSDT%20Edit/" target="_blank" rel="noopener">VoodooI2C触摸板驱动教程</a>获取原始内容！！！！</h1><p>本文来自于触摸群的bat，是对本教程<a href="https://www.penghubingzhou.cn/2019/01/06/VoodooI2C%20DSDT%20Edit/" target="_blank" rel="noopener">VoodooI2C触摸板驱动教程</a>的补充。感谢bat的倾力付出！！！建议所有触摸板小白在学习完原教程后，来这里看一下，以解决一些困惑你的东西。</p>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="https://github.com/williambj1/VoodooI2C-PreRelease/blob/master/%E8%A7%A6%E6%91%B8%E6%9D%BF%E8%A1%A5%E5%85%85.md#fq" target="_blank" rel="noopener">FAQ</a></li>
 <li><a href="https://github.com/williambj1/VoodooI2C-PreRelease/blob/master/%E8%A7%A6%E6%91%B8%E6%9D%BF%E8%A1%A5%E5%85%85.md#%E8%A7%A6%E6%91%B8%E6%9D%BF%E4%B8%93%E6%9C%89%E8%AF%8D%E6%B1%87%E9%9B%86%E5%90%88" target="_blank" rel="noopener">触摸板专有词汇集合</a></li>
