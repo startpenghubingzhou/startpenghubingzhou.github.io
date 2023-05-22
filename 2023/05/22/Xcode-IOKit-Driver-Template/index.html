@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://startpenghubingzhou.github.io/2023/05/22/Xcode-IOKit-Driver-Template/1.png">
 <meta property="og:image" content="https://startpenghubingzhou.github.io/2023/05/22/Xcode-IOKit-Driver-Template/2.png">
 <meta property="article:published_time" content="2023-05-22T08:56:52.000Z">
-<meta property="article:modified_time" content="2023-05-22T09:56:17.623Z">
+<meta property="article:modified_time" content="2023-05-22T10:05:57.966Z">
 <meta property="article:author" content="penghubingzhou">
 <meta property="article:tag" content="IOKit">
 <meta property="article:tag" content="开发， Xcode">
@@ -235,7 +235,7 @@
 <p>转机出现在今天的上午。我本来是要研究在Xcode中AI补全代插件开发的问题，却无意间浏览到了<a target="_blank" rel="noopener" href="https://github.com/kattrali">kattrali</a> 老哥的 <a target="_blank" rel="noopener" href="https://github.com/kattrali/Xcode-Plugin-Template">Xcode-Plugin-Template</a>项目。在这，我突然就迸发了一丝火花，既然他都可以创造出一个模板来，我为什么就不能动手改进现有的IOKit模板来方便我的创作呢？</p>
 <img src="/2023/05/22/Xcode-IOKit-Driver-Template/0.jpg" class="" alt="my post image">
 
-<p>说干就干，我首先提取出了我现在使用的Xcode9.3版本的<code>IOKit Driver.xctemplate</code>文件，然后对这里的文件与kattrali](<a target="_blank" rel="noopener" href="https://github.com/kattrali">https://github.com/kattrali</a>) 老哥项目的文件进行比对分析，经过了几个小时的摸索努力，终于成功改造出来了全新的IOKit模板！</p>
+<p>说干就干，我首先提取出了我现在使用的Xcode9.3版本的<code>IOKit Driver.xctemplate</code>文件，然后对这里的文件与<a target="_blank" rel="noopener" href="https://github.com/kattrali">kattrali</a> 老哥项目的文件进行比对分析，经过了几个小时的摸索努力，终于成功改造出来了全新的IOKit模板！</p>
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>在写IOKit的时候，我们有些必要的代码是需要补全的，比如在头文件里，你会写出这样的类似代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#ifndef qqq_h</span><br><span class="line">#define qqq_h</span><br><span class="line"></span><br><span class="line">// IOKit库基本头文件需要引入</span><br><span class="line">#include &lt;IOKit/IOLib.h&gt;</span><br><span class="line">#include &lt;IOKit/IOService.h&gt;</span><br><span class="line"></span><br><span class="line">// 定义你的设备类，并继承IOService（也有可能是IOService的子类或者是OSObject）</span><br><span class="line">class qqq : public IOService &#123;</span><br><span class="line">// OSMetaClass宏定义，负责为你的IOKit驱动引入OSMetaClass管理机制</span><br><span class="line">    OSDeclareDefaultStructors(qqq)</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">// IOService基本函数</span><br><span class="line">    virtual bool start(IOService* provider) APPLE_KEXT_OVERRIDE;</span><br><span class="line"></span><br><span class="line">    virtual void stop(IOService* provider) APPLE_KEXT_OVERRIDE;</span><br><span class="line"> </span><br><span class="line">//定义你需要的各种函数</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">#endif /* qqq_h */</span><br></pre></td></tr></table></figure>
 
@@ -253,6 +253,7 @@
 </ul>
 <p>当你使用了这个模板以后，你只需要建立一个IOKit工程，系统就会自动为你提供一个现成的代码示例，方便你的开发：</p>
 <img src="/2023/05/22/Xcode-IOKit-Driver-Template/1.png" class="" alt="my post image">
+
 
 <img src="/2023/05/22/Xcode-IOKit-Driver-Template/2.png" class="" alt="my post image">
 
